@@ -21,15 +21,15 @@ namespace ReloChatBot
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
 
-            LuisClient test = new LuisClient();
-            string result = test.QueryLuis("test");
+            
 
 
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
+
+                LuisClient test = new LuisClient();
+                string result = test.QueryLuis("test");
 
                 // return our reply to the user
                 Activity reply = activity.CreateReply(result);
