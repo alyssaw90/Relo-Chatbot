@@ -22,7 +22,8 @@ namespace ReloChatBot
         {
 
             LuisClient test = new LuisClient();
-            Task<LuisInfo> task = test.QueryLuis("test");
+            string result = test.QueryLuis("test");
+
 
             if (activity.Type == ActivityTypes.Message)
             {
@@ -31,7 +32,7 @@ namespace ReloChatBot
                 int length = (activity.Text ?? string.Empty).Length;
 
                 // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
