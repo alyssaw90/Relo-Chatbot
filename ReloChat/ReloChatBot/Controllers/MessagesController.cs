@@ -18,11 +18,11 @@ namespace ReloChatBot
     public class LuisParser
     {
         // Spot the python programmer...
-        private LuisClient client;
-        private string raw_result;
-        private string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
+        protected LuisClient client;
+        protected string raw_result;
+        protected string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
 
-        private Dictionary<string, string> actions = IntentDirectory.actions;
+        protected Dictionary<string, string> actions = IntentDirectory.actions;
 
         public JObject json_result;
 
@@ -33,7 +33,7 @@ namespace ReloChatBot
             this.JsonResult();
         }
 
-        public void JsonResult()
+        protected void JsonResult()
         {
             this.json_result = JObject.Parse(this.raw_result);
         }
