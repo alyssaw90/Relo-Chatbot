@@ -7,26 +7,51 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
+using ReloChatBot;
 
 namespace ReloChatBot
 {
-    [BotAuthentication]
+
+    public class LuisParser
+    {
+        private LuisClient client;
+        private string raw_result;
+        private string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
+
+        public LuisParser(string query)
+        {
+            this.client = new LuisClient();
+            this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
+        }
+
+        public string RawResult
+        {
+            get { return this.raw_result; }
+        }
+
+
+    }
+
+    // [BotAuthentication]
     public class MessagesController : ApiController
     {
+
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
+
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
+
+                LuisParser test = new LuisParser(activity.Text);
+                string result = test.RawResult;
 
                 // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
@@ -58,6 +83,9 @@ namespace ReloChatBot
             else if (message.Type == ActivityTypes.Typing)
             {
                 // Handle knowing tha the user is typing
+                //ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
+                //Activity reply = message.CreateReply("Are you typing?");
+                //connector.Conversations.ReplyToActivityAsync(reply);
             }
             else if (message.Type == ActivityTypes.Ping)
             {
