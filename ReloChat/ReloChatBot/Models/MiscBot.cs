@@ -22,6 +22,6 @@ namespace ReloChatBot.Models
     }
 }
 
-using RelochatBot.models;
-var x = new MiscBot("hello world");
-x.raw_result;
+//using RelochatBot.models;
+//var x = new MiscBot("hello world");
+//x.raw_result;
