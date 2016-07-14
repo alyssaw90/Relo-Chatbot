@@ -61,6 +61,9 @@ namespace ReloChatBot
             else if (message.Type == ActivityTypes.Typing)
             {
                 // Handle knowing tha the user is typing
+                //ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
+                //Activity reply = message.CreateReply("Are you typing?");
+                //connector.Conversations.ReplyToActivityAsync(reply);
             }
             else if (message.Type == ActivityTypes.Ping)
             {
