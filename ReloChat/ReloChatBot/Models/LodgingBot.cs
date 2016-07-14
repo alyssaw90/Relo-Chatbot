@@ -12,3 +12,9 @@ namespace ReloChatBot.Models
         public LodgingBot(string query) : base(query) { }
     }
 }
+
+
+/*
+ * instance = LuisParser("hello world");
+ * intent = instance.Intent;
+ * /

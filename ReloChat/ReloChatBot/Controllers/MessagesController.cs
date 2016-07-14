@@ -22,7 +22,7 @@ namespace ReloChatBot
         protected string raw_result;
         protected string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
 
-        protected Dictionary<string, string> actions = IntentDirectory.actions;
+        protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
         public JObject json_result;
 
