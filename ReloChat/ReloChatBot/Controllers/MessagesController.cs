@@ -9,6 +9,8 @@ using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using ReloChatBot;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using ReloChatBot.Models;
 
 namespace ReloChatBot
 {
@@ -19,6 +21,8 @@ namespace ReloChatBot
         private LuisClient client;
         private string raw_result;
         private string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
+
+        private Dictionary<string, string> actions = IntentDirectory.actions;
 
         public JObject json_result;
 
@@ -39,6 +43,11 @@ namespace ReloChatBot
             get { return json_result["intents"][0]["intent"].ToString(); }
         }
 
+        public string Reply
+        {
+            get { return this.actions[this.Intent]; }
+        }
+
     }
 
     // [BotAuthentication]
@@ -57,7 +66,7 @@ namespace ReloChatBot
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 LuisParser test = new LuisParser(activity.Text);
-                string result = test.Intent;
+                string result = test.Reply;
 
                 // return our reply to the user
                 Activity reply = activity.CreateReply(result);
