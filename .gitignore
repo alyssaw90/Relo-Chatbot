@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# Secret files
+secret.html
+secret.sh
+secret.bat
