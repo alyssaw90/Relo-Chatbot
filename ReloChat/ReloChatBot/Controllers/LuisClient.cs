@@ -8,7 +8,7 @@ namespace ReloChatBot
     public class LuisClient
     {
         //A method that will send the user's input as a query to Luis and returns the intents and entities.
-        public static async Task<LuisInfo> QueryLuis(string strInput)
+        public async Task<LuisInfo> QueryLuis(string strInput)
         {
             string strRet = string.Empty;
 
@@ -18,7 +18,7 @@ namespace ReloChatBot
             using (var client = new HttpClient())
             {
                 //The Luis URI will be inserted below.
-                string uri = "Paste the Master Luis URI Here&q=" + strEscaped;
+                string uri = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=" + strEscaped;
                 HttpResponseMessage msg = await client.GetAsync(uri);
 
                 if (msg.IsSuccessStatusCode)

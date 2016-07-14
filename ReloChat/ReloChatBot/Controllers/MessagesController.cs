@@ -7,10 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
+using ReloChatBot;
 
 namespace ReloChatBot
 {
-    [BotAuthentication]
+    // [BotAuthentication]
     public class MessagesController : ApiController
     {
         /// <summary>
@@ -19,6 +20,10 @@ namespace ReloChatBot
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
+
+            LuisClient test = new LuisClient();
+            Task<LuisInfo> task = test.QueryLuis("test");
+
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
