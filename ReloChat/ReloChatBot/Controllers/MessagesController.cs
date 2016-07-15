@@ -21,7 +21,6 @@ namespace ReloChatBot
         protected LuisClient client;
         protected string raw_result;
         protected string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
-        public bool RedirectionRequired = false;
 
         protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
@@ -71,25 +70,25 @@ namespace ReloChatBot
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
+                // create one big string
+                string result = "";
+
                 LuisParser masterbot = new LuisParser(activity.Text);
-                string result = masterbot.Reply;
+                result += masterbot.Reply;
 
-                
-                // return our reply to the user
-                Activity reply = activity.CreateReply(result);
-                await connector.Conversations.ReplyToActivityAsync(reply);
-
-                if (masterbot.RedirectionRequired)
+                if (masterbot.RedirectRequired)
                 {
                     // Okay figure out what redirection they need
-                    if (masterbot.Intent == "RedirectLoding")
+                    if (masterbot.Intent == "RedirectLodging")
                     {
                         // lobot redirect
                         LodgingBot lobot = new LodgingBot(activity.Text);
-                        Activity lobot_reply = activity.CreateReply(lobot.Reply);
-                        await connector.Conversations.ReplyToActivityAsync(lobot_reply);
-                    }
+                        result += ". Loding doing things";
+                    } 
                 }
+
+                Activity reply = activity.CreateReply(result);
+                await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
             {
