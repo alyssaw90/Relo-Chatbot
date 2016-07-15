@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections;
 
 namespace ReloChatBot.Models
 {
@@ -18,6 +19,11 @@ namespace ReloChatBot.Models
         public static Dictionary<string, string> commute_actions = new Dictionary<string, string>()
         {
             { "", "" },
+        };
+
+        public static Dictionary<string, string> lodging_actions = new Dictionary<string, string>()
+        {
+            { "", "" }
         };
     }
 }
