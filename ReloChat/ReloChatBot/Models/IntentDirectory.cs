@@ -25,5 +25,10 @@ namespace ReloChatBot.Models
         {
             { "", "" }
         };
+
+        public static Dictionary<string, string> misc_actions = new Dictionary<string, string>()
+        {
+            { "GetWeather", "checkout this website for latest weather" }
+        };
     }
 }
