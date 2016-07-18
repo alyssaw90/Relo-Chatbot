@@ -27,7 +27,8 @@ namespace ReloChatBot.Controllers
                 }
                 else
                 {
-                    this.reply = "No handle created for \"" + this.masterbot.Intent + "\"!";
+                    this.reply = masterbot.Reply;
+                    // this.reply = "No handle created for \"" + this.masterbot.Intent + "\"!";
                     // throw new Exception("No handle created for \"" + this.masterbot.Intent + "\"!");
                 }
             } else

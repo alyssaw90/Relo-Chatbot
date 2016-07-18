@@ -81,25 +81,9 @@ namespace ReloChatBot
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
-                // create one big string
-                string result = "";
-
                 LuisParser masterbot = new LuisParser(activity.Text);
-                result += masterbot.Reply;
-
-                BotController router = new BotController(masterbot, activity.Text);
-                result += router.Reply;
-
-                //if (masterbot.RedirectRequired)
-                //{
-                //    // Okay figure out what redirection they need
-                //    if (masterbot.Intent == "RedirectLodging")
-                //    {
-                //        // lobot redirect
-                //        LodgingBot lobot = new LodgingBot(activity.Text);
-                //        result += ". " + lobot.Reply;
-                //    } 
-                //}
+                BotController Router = new BotController(masterbot, activity.Text);
+                string result = Router.Reply;
 
                 Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
