@@ -33,7 +33,7 @@ namespace ReloChatBot.Controllers
                 }
             } else
             {
-                this.reply = "";
+                this.reply = masterbot.Reply;
             }
         }
         private void handle_RedirectLodging()
