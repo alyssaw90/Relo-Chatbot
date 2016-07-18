@@ -14,16 +14,8 @@ namespace ReloChatBot.Models
             { "RedirectLodging", "Sounds like you have lodging questions" },
             { "WhatIsLeap", "Sounds like you have questions regarding what LEAP is" },
             { "WhereIsLeap", "Leap is located in Microsoft Building 86." },
-            { "None", "I'm not sure if I understood you properly." }
-        };
-        public static Dictionary<string, string> commute_actions = new Dictionary<string, string>()
-        {
-            { "", "" },
-        };
-
-        public static Dictionary<string, string> lodging_actions = new Dictionary<string, string>()
-        {
-            { "", "" }
+            { "None", "I'm not sure if I understood you properly." },
+            { "FriendlyUser", "Hello! I am Relo. A bot here to help you with all general questions. Ask me any question!" },
         };
     }
 }
