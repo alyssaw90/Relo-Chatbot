@@ -50,7 +50,7 @@ namespace ReloChatBot
 
         public string Reply
         {
-            get { return this.actions[this.Intent]; }
+            get { return this.Intent; }
         }
 
     }
@@ -85,6 +85,10 @@ namespace ReloChatBot
                         LodgingBot lobot = new LodgingBot(activity.Text);
                         result += ". Loding doing things";
                     } 
+                    else
+                    {
+                        result += ". Unsure of user intent ({masterbot.Intent}).";
+                    }
                 }
 
                 Activity reply = activity.CreateReply(result);
