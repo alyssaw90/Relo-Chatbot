@@ -32,7 +32,7 @@ namespace ReloChatBot.Models
     /// </summary>
     public class LodgingBotFunctionality
     {
-        private string intent, reply;
+        private string intent;
 
         private Dictionary<string, string> actions = new Dictionary<string, string>()
         {
