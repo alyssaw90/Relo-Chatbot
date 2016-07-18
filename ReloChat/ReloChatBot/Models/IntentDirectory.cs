@@ -17,19 +17,5 @@ namespace ReloChatBot.Models
             { "None", "I'm not sure if I understood you properly." },
             { "FriendlyUser", "Hello! I am Relo. A bot here to help you with all general questions. Ask a question!" },
         };
-        public static Dictionary<string, string> commute_actions = new Dictionary<string, string>()
-        {
-            { "", "" },
-        };
-
-        public static Dictionary<string, string> lodging_actions = new Dictionary<string, string>()
-        {
-            { "", "" }
-        };
-
-        public static Dictionary<string, string> misc_actions = new Dictionary<string, string>()
-        {
-            { "GetWeather", "checkout this website for latest weather" }
-        };
     }
 }
