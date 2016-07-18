@@ -1,4 +1,5 @@
-﻿using ReloChatBot.Models;
+﻿using Microsoft.Bot.Connector;
+using ReloChatBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace ReloChatBot.Controllers
         private string userinput;
 
         private string reply;
+        private Activity activity;
 
-        public BotController(LuisParser masterbot, string userinput)
+        public BotController(LuisParser masterbot, Activity activity)
         {
             this.masterbot = masterbot;
-            this.userinput = userinput;
+            this.activity = activity;
+            this.userinput = this.activity.Text;
             if (masterbot.RedirectRequired)
             {
                 if (masterbot.Intent == RedirectLodging)

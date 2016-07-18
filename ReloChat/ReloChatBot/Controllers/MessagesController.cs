@@ -82,7 +82,7 @@ namespace ReloChatBot
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 LuisParser masterbot = new LuisParser(activity.Text);
-                BotController Router = new BotController(masterbot, activity.Text);
+                BotController Router = new BotController(masterbot, activity);
                 string result = Router.Reply;
 
                 Activity reply = activity.CreateReply(result);
