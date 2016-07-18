@@ -15,7 +15,7 @@ namespace ReloChatBot.Models
             { "WhatIsLeap", "Sounds like you have questions regarding what LEAP is" },
             { "WhereIsLeap", "Leap is located in Microsoft Building 86." },
             { "None", "I'm not sure if I understood you properly." },
-            { "FriendlyUser", "Hello! I am Relo. A bot here to help you with all general questions. Ask a question!" },
+            { "FriendlyUser", "Hello! I am Relo. A bot here to help you with all general questions. Ask me any question!" },
         };
     }
 }
