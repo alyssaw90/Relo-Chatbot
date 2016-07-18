@@ -20,14 +20,15 @@ namespace ReloChatBot
         // Spot the python programmer...
         protected LuisClient client;
         protected string raw_result;
-        protected string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
+        protected string api_endpoint;
 
         protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
         public JObject json_result;
 
-        public LuisParser(string query)
+        public LuisParser(string query, string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=")
         {
+            this.api_endpoint = api_endpoint;
             this.client = new LuisClient();
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
             this.JsonResult();
@@ -48,7 +49,7 @@ namespace ReloChatBot
             get { return this.Intent.StartsWith("Redirect"); }
         }
 
-        public string Reply
+        public virtual string Reply
         {
             get {
                 try
@@ -92,7 +93,7 @@ namespace ReloChatBot
                     {
                         // lobot redirect
                         LodgingBot lobot = new LodgingBot(activity.Text);
-                        result += ". Loding doing things";
+                        result += ". " + lobot.Reply;
                     } 
                 }
 
