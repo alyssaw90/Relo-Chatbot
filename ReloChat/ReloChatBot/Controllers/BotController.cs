@@ -41,7 +41,7 @@ namespace ReloChatBot.Controllers
         }
         private void handle_RedirectLodging()
         {
-            LodgingBot lobot = new LodgingBot(this.userinput);
+            LodgingBot lobot = new LodgingBot(this.activity);
             this.reply = lobot.Reply;
         }
 
