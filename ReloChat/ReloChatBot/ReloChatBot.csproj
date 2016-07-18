@@ -122,6 +122,7 @@
     <Compile Include="Commute.cs" />
     <Compile Include="CommuteInfo.cs" />
     <Compile Include="CommuteUtilities.cs" />
+    <Compile Include="Controllers\BotController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
