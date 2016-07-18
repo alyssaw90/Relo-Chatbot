@@ -50,7 +50,16 @@ namespace ReloChatBot
 
         public string Reply
         {
-            get { return this.Intent; }
+            get {
+                try
+                {
+                    return this.actions[this.Intent];
+                }
+                catch (KeyNotFoundException)
+                {
+                    return this.Intent + " (No action defined for this Intent).";
+                }
+            }
         }
 
     }
