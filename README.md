@@ -23,8 +23,47 @@ public static Dictionary<string, string> master_actions = new Dictionary<string,
 ```
 
 ## Complex Bot
+If you are building a new bot (New Luis.AI bot), you will need to create a new Bot under the `models/` directory. From there, you will need to create something like this:
 
+```
+public class LodgingBot : LuisParser
+    {
+        public LodgingBot(string query, string api_endpoint = "www.luis_endpoint_here.com?q=") : base(query, api_endpoint) { }
+        public override string Reply
+        {
+            get { return this.GetReply(); }
+        }
 
+        private string GetReply()
+        {
+            // This will return the Intent that luis Determines.
+            return this.Intent;
+        }
+    }
+```
+
+Customize the class to your liking, then in `Controllers/BotController.cs` add a method to construct and set the reply attribute.
+
+For example:
+
+```
+    private void handle_RedirectLodging()
+        {
+            LodgingBot lobot = new LodgingBot(this.userinput);
+            this.reply = lobot.Reply;
+        }
+```
+
+Then invoke it in the constructor function like so:
+
+```
+if (masterbot.Intent == RedirectLodging)
+      {
+          this.handle_RedirectLodging();
+      }
+```
+
+You can then access the `BotController.Reply` property (note the capital `R`) from anywhere.
 
 # Development Setup
 When loading the app, make sure to set `ReloChatBot` as the StartUp Project.
