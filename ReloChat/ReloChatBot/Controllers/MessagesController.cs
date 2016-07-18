@@ -94,10 +94,6 @@ namespace ReloChatBot
                         LodgingBot lobot = new LodgingBot(activity.Text);
                         result += ". Loding doing things";
                     } 
-                    else
-                    {
-                        result += ". Unsure of user intent ({masterbot.Intent}).";
-                    }
                 }
 
                 Activity reply = activity.CreateReply(result);
