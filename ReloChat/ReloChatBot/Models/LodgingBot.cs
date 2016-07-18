@@ -20,17 +20,36 @@ namespace ReloChatBot.Models
 
         private string GetReply()
         {
-
-            return this.Intent;
+            LodgingBotFunctionality functionality = new LodgingBotFunctionality(this.Intent);
+            return functionality.Reply;
         }
+
+
     }
 
+    /// <summary>
+    /// All the functionality of the bot
+    /// </summary>
     public class LodgingBotFunctionality
     {
-        private string intent;
+        private string intent, reply;
+
+        private Dictionary<string, string> actions = new Dictionary<string, string>()
+        {
+            { "DetermineRelocationCost", "The average cost is ..." },
+            { "DetermineMoveIsViable", "I think moving for you is a _ idea." },
+            { "ElevatorPitch", "Here's the predicament you're in." },
+            { "LeapLocationQuestion", "Leap is located in building 86" },
+        };
+
         public LodgingBotFunctionality(string intent)
         {
             this.intent = intent;
+        }
+
+        public string Reply
+        {
+            get { return this.actions[this.intent]; }
         }
     }
 
