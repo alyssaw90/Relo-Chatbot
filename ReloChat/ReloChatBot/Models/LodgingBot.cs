@@ -13,9 +13,3 @@ namespace ReloChatBot.Models
     }
 
 }
-
-
-/*
- * instance = LuisParser("hello world");
- * intent = instance.Intent;
- */
