@@ -28,7 +28,7 @@ If you are building a new bot (New Luis.AI bot), you will need to create a new B
 ```
 public class LodgingBot : LuisParser
     {
-        public LodgingBot(string query, string api_endpoint = "www.luis_endpoint_here.com?q=") : base(query, api_endpoint) { }
+        public LodgingBot(Activity activity, string api_endpoint = "www.luis_endpoint_here.com?q=") : base(activity, api_endpoint) { }
         public override string Reply
         {
             get { return this.GetReply(); }
