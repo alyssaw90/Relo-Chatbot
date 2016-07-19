@@ -47,6 +47,10 @@ namespace ReloChatBot.Models
             { "LocationRecomendation", "I think you should move to ..." }
         };
 
+        private string[] QuestionArray = {
+            "Are you interested in Relocating?",
+        }; 
+
         /*
          * BotStates: 
          * string ClientCurrentLocation: Where the client currently claims to live.
@@ -56,6 +60,7 @@ namespace ReloChatBot.Models
          * string CityPreference: User's current city preference;
          * bool ClientInterestedInRelo: User wants to use relocation services;
          * bool ClientNotInterested: User already Declined;
+         * int LastQuestion: A key of the last question that was asked;
          */
 
         /// <summary>
@@ -126,11 +131,17 @@ namespace ReloChatBot.Models
         {
             // Manipulate bot state and generate a reply
 
-            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("ClientNotInterested"))
+            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("ClientNotInterested") && this.GetIntProperty("LastQuestion") != 0)
             {
-                return "Are you interested in relocating?";
+                this.SetProperty("LastQuestion", 0);
+                return this.QuestionArray[0];
+            } else if (this.GetIntProperty("LastQuestion") == 0)
+            {
+                this.SetProperty("LastQuestion", -1);
+                return "I see...";
             } else
             {
+                this.SetProperty("LastQuestion", -1);
                 return "default";
             }
 
