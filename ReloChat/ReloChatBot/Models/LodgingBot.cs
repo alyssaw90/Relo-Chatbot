@@ -35,6 +35,9 @@ namespace ReloChatBot.Models
     {
         private string intent;
         private Activity activity;
+        /// <summary>
+        /// Temporary variable
+        /// </summary>
         private Dictionary<string, string> actions = new Dictionary<string, string>()
         {
             { "DetermineRelocationCost", "The average cost is ..." },

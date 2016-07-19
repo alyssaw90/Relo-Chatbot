@@ -10,6 +10,8 @@ namespace ReloChatBot.Controllers
     public class BotController
     {
         const string RedirectLodging = "RedirectLodging";
+        const string PositiveConfirmation = "PositiveConfirmation";
+        const string NegativeConfirmation = "NegativeConfirmation";
 
         private LuisParser masterbot;
         private string userinput;
@@ -17,14 +19,20 @@ namespace ReloChatBot.Controllers
         private string reply;
         private Activity activity;
 
+        private bool ManualOverRide = false;
+
         public BotController(LuisParser masterbot, Activity activity)
         {
             this.masterbot = masterbot;
             this.activity = activity;
             this.userinput = this.activity.Text;
-            if (masterbot.RedirectRequired)
+
+            // If the Intent is a Positive or Negative Confirmation, pass it on to the last bot that was talking.
+            this.ManualOverRide = (masterbot.Intent == PositiveConfirmation || masterbot.Intent == NegativeConfirmation);
+
+            if (masterbot.RedirectRequired || this.ManualOverRide)
             {
-                if (masterbot.Intent == RedirectLodging)
+                if (masterbot.Intent == RedirectLodging || this.LastBotConversation == RedirectLodging)
                 {
                     this.handle_RedirectLodging();
                 }
@@ -62,7 +70,7 @@ namespace ReloChatBot.Controllers
 
         private void handle_RedirectLodging()
         {
-            this.LastBotConversation = "lobot";
+            this.LastBotConversation = RedirectLodging;
             LodgingBot lobot = new LodgingBot(this.activity);
             this.reply = lobot.Reply;
         }
