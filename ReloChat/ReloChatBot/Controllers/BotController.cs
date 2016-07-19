@@ -32,8 +32,11 @@ namespace ReloChatBot.Controllers
 
             if (masterbot.RedirectRequired || this.ManualOverRide)
             {
-                if (masterbot.Intent == RedirectLodging || this.LastBotConversation == RedirectLodging)
+                if (masterbot.Intent == RedirectLodging || this.GetLastBotConversation() == RedirectLodging)
                 {
+                    this.SetLastBotConversation(RedirectLodging);
+                    //string test1 = this.GetLastBotConversation();
+                    //bool test = this.GetLastBotConversation() == RedirectLodging;
                     this.handle_RedirectLodging();
                 }
                 else
@@ -60,6 +63,7 @@ namespace ReloChatBot.Controllers
             StateClient stateclient = this.activity.GetStateClient();
             BotData userdata = stateclient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
             userdata.SetProperty<string>("LastBotConversation", bot);
+            stateclient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userdata);
         }
 
         public string LastBotConversation
