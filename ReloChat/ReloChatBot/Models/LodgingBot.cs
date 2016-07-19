@@ -23,7 +23,7 @@ namespace ReloChatBot.Models
 
         private string GetReply()
         {
-            LodgingBotFunctionality functionality = new LodgingBotFunctionality(this.Intent, this.activity);
+            LodgingBotFunctionality functionality = new LodgingBotFunctionality(this.Intent, this.activity, this.masterbot);
             return functionality.Reply;
         }
 
@@ -50,22 +50,25 @@ namespace ReloChatBot.Models
             { "DetermineMoveIsViable", "I think moving for you is a _ idea." },
             { "ElevatorPitch", "Here's the predicament you're in." },
             { "LeapLocationQuestion", "Leap is located in building 86" },
-            { "LocationRecomendation", "I think you should move to ..." }
+            { "LocationRecomendation", "I think you should move to ..." },
+            { "LeapRelocationServices", "At the moment, LEAP will not compensate for any relocation expenses. I can try and help you determine costs though. Would you like to proceed?" },
         };
 
         private string[] QuestionArray = {
             "Are you interested in Relocating?",
-        }; 
+        };
+
+        private LuisParser masterbot;
 
         /*
-         * BotStates: 
+         * BotStates:
          * string ClientCurrentLocation: Where the client currently claims to live.
          * int ClientRentTarget: How much the client can currently afford.
          * int CommuteTimeRange: Maximum time the user is okay commuting;
          * bool AccessToCar: Does the user have access to a car;
          * string CityPreference: User's current city preference;
          * bool ClientInterestedInRelo: User wants to use relocation services;
-         * bool ClientNotInterested: User already Declined;
+         * bool AskedClientAboutRelo: User already Declined;
          * int LastQuestion: A key of the last question that was asked;
          */
 
@@ -74,10 +77,12 @@ namespace ReloChatBot.Models
         /// </summary>
         /// <param name="intent"></param>
         /// <param name="activity"></param>
-        public LodgingBotFunctionality(string intent, Activity activity)
+        /// <param name="masterbot"></param>
+        public LodgingBotFunctionality(string intent, Activity activity, LuisParser masterbot)
         {
             this.intent = intent;
             this.activity = activity;
+            this.masterbot = masterbot;
         }
 
         public string Reply
@@ -88,6 +93,11 @@ namespace ReloChatBot.Models
             }
         }
 
+        /// <summary>
+        /// All these GET/SET stuff is for maintianing the State of the bot
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private string GetProperty(string key)
         {
             StateClient stateClient = this.activity.GetStateClient();
@@ -133,18 +143,36 @@ namespace ReloChatBot.Models
             stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
         }
 
+        /// <summary>
+        /// Generate a reply
+        /// </summary>
+        /// <returns>The string to be shipped to the client</returns>
         private string GetReply()
         {
             // Manipulate bot state and generate a reply
 
-            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("ClientNotInterested") && this.GetIntProperty("LastQuestion") != 0)
+            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("AskedClientAboutRelo") && this.GetIntProperty("LastQuestion") != 0)
             {
                 this.SetProperty("LastQuestion", 0);
                 return this.QuestionArray[0];
             } else if (this.GetIntProperty("LastQuestion") == 0)
             {
-                this.SetProperty("LastQuestion", -1);
-                return "I see...";
+                if (this.masterbot.Intent == "PositiveConfirmation")
+                {
+                    this.SetProperty("LastQuestion", -1);
+                    this.SetProperty("AskedClientAboutRelo", true);
+                    this.SetProperty("ClientInterestedInRelo", true);
+                    return "Oh cool! Can I help you narrow down your choices?";
+                } else if (this.masterbot.Intent == "NegativeConfirmation")
+                {
+                    this.SetProperty("LastQuestion", -1);
+                    this.SetProperty("AskedClientAboutRelo", true);
+                    this.SetProperty("ClientInterestedInRelo", false);
+                    return "Aww. Well sorry about that.";
+                } else
+                {
+                    return "Come again?";
+                }
             } else
             {
                 this.SetProperty("LastQuestion", -1);
