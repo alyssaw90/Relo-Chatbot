@@ -39,8 +39,10 @@ namespace ReloChatBot.Controllers
                 this.reply = masterbot.Reply;
             }
         }
+
         private void handle_RedirectLodging()
         {
+            this.masterbot.LastBotConversation = "lobot";
             LodgingBot lobot = new LodgingBot(this.activity);
             this.reply = lobot.Reply;
         }

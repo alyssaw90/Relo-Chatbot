@@ -39,6 +39,26 @@ namespace ReloChatBot
             this.JsonResult();
         }
 
+        private string GetLastBotConversation()
+        {
+            StateClient stateclient = this.activity.GetStateClient();
+            BotData userData = stateclient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            return userData.GetProperty<string>("LastBotConversation");
+        }
+
+        private void SetLastBotConversation(string bot)
+        {
+            StateClient stateclient = this.activity.GetStateClient();
+            BotData userdata = stateclient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            userdata.SetProperty<string>("LastBotConversation", bot);
+        }
+
+        public string LastBotConversation
+        {
+            get { return this.GetLastBotConversation(); }
+            set { this.SetLastBotConversation(value);  }
+        }
+
         protected void JsonResult()
         {
             this.json_result = JObject.Parse(this.raw_result);
@@ -54,6 +74,10 @@ namespace ReloChatBot
             get { return this.Intent.StartsWith("Redirect"); }
         }
 
+        /// <summary>
+        /// Overwrite this with your own version
+        /// using `public override string Reply {get;}`
+        /// </summary>
         public virtual string Reply
         {
             get {
