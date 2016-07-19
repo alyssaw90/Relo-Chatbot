@@ -58,7 +58,24 @@ namespace ReloChatBot.Models
 
         public string Reply
         {
-            get { return this.actions[this.intent]; }
+            //get { return this.actions[this.intent]; }
+            get { return this.GetReply(); }
+        }
+
+        private string GetReply()
+        {
+            StateClient stateclient = this.activity.GetStateClient();
+            BotData data = stateclient.BotState.GetConversationData(activity.ChannelId, activity.From.Id);
+
+            
+            if (data.GetProperty<string>("test") == "test")
+            {
+                return "Something ain't right...";
+            } else
+            {
+                data.SetProperty("test", "test");
+                return "Well.. something changed!";
+            }
         }
     }
 
