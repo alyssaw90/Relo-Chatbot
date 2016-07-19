@@ -46,8 +46,13 @@ namespace ReloChatBot.Models
 
         /*
          * BotStates: 
-         * 
-         * 
+         * string ClientCurrentLocation: Where the client currently claims to live.
+         * int ClientRentTarget: How much the client can currently afford.
+         * int CommuteTimeRange: Maximum time the user is okay commuting;
+         * bool AccessToCar: Does the user have access to a car;
+         * string CityPreference: User's current city preference;
+         * bool ClientInterestedInRelo: User wants to use relocation services;
+         * bool ClientNotInterested: User already Declined;
          */
 
         /// <summary>
@@ -83,6 +88,13 @@ namespace ReloChatBot.Models
             return userData.GetProperty<bool>(key);
         }
 
+        private int GetIntProperty(string key)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            return userData.GetProperty<int>(key);
+        }
+
         private void SetProperty(string key, string value)
         {
             StateClient stateClient = this.activity.GetStateClient();
@@ -99,20 +111,26 @@ namespace ReloChatBot.Models
             stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
         }
 
+        private void SetProperty(string key, int value)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            userData.SetProperty<int>(key, value);
+            stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
+        }
+
         private string GetReply()
         {
             // Manipulate bot state and generate a reply
 
-            
-
-            if (this.GetBoolProperty("test"))
+            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("ClientNotInterested"))
             {
-                return "TEST WAS SET";
+                return "Are you interested in relocating?";
             } else
             {
-                this.SetProperty("test", true);
-                return "TEST WAS NOT SET";
+                return "default";
             }
+
         }
     }
 
