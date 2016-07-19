@@ -38,27 +38,7 @@ namespace ReloChatBot
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
             this.JsonResult();
         }
-
-        private string GetLastBotConversation()
-        {
-            StateClient stateclient = this.activity.GetStateClient();
-            BotData userData = stateclient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
-            return userData.GetProperty<string>("LastBotConversation");
-        }
-
-        private void SetLastBotConversation(string bot)
-        {
-            StateClient stateclient = this.activity.GetStateClient();
-            BotData userdata = stateclient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
-            userdata.SetProperty<string>("LastBotConversation", bot);
-        }
-
-        public string LastBotConversation
-        {
-            get { return this.GetLastBotConversation(); }
-            set { this.SetLastBotConversation(value);  }
-        }
-
+        
         protected void JsonResult()
         {
             this.json_result = JObject.Parse(this.raw_result);
