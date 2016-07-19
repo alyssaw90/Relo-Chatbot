@@ -10,6 +10,7 @@ namespace ReloChatBot.Controllers
     public class BotController
     {
         const string RedirectLodging = "RedirectLodging";
+        const string RedirectCommute = "RedirectTransportation";
 
         private LuisParser masterbot;
         private string userinput;
@@ -28,6 +29,10 @@ namespace ReloChatBot.Controllers
                 {
                     this.handle_RedirectLodging();
                 }
+                if (masterbot.Intent == RedirectCommute)
+                {
+                    this.handle_RedirectCommute();
+                }
                 else
                 {
                     this.reply = masterbot.Reply;
@@ -45,6 +50,11 @@ namespace ReloChatBot.Controllers
             this.reply = lobot.Reply;
         }
 
+        private void handle_RedirectCommute()
+        {
+            CommuteBot combot = new CommuteBot(this.activity);
+            this.reply = combot.Reply;
+        }
         public string Reply
         {
             get { return this.reply; }
