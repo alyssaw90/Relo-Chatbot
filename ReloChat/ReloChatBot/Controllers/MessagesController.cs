@@ -8,27 +8,64 @@ using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using ReloChatBot;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using ReloChatBot.Models;
+using ReloChatBot.Controllers;
 
 namespace ReloChatBot
 {
 
     public class LuisParser
     {
-        private LuisClient client;
-        private string raw_result;
-        private string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=";
+        // Spot the python programmer...
+        protected LuisClient client;
+        protected string raw_result;
+        protected string api_endpoint;
+        protected Activity activity;
+        private string query;
 
-        public LuisParser(string query)
+        protected Dictionary<string, string> actions = IntentDirectory.master_actions;
+
+        public JObject json_result;
+
+        public LuisParser(Activity activity, string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=")
         {
+            this.query = activity.Text;
+            this.api_endpoint = api_endpoint;
             this.client = new LuisClient();
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
+            this.JsonResult();
         }
 
-        public string RawResult
+        protected void JsonResult()
         {
-            get { return this.raw_result; }
+            this.json_result = JObject.Parse(this.raw_result);
         }
 
+        public string Intent
+        {
+            get { return json_result["intents"][0]["intent"].ToString(); }
+        }
+
+        public bool RedirectRequired
+        {
+            get { return this.Intent.StartsWith("Redirect"); }
+        }
+
+        public virtual string Reply
+        {
+            get {
+                try
+                {
+                    return this.actions[this.Intent];
+                }
+                catch (KeyNotFoundException)
+                {
+                    return this.Intent + " (No action defined for this Intent).";
+                }
+            }
+        }
 
     }
 
@@ -47,10 +84,10 @@ namespace ReloChatBot
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
-                LuisParser test = new LuisParser(activity.Text);
-                string result = test.RawResult;
+                LuisParser masterbot = new LuisParser(activity);
+                BotController Router = new BotController(masterbot, activity);
+                string result = Router.Reply;
 
-                // return our reply to the user
                 Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
