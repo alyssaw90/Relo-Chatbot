@@ -129,7 +129,6 @@
     </Compile>
     <Compile Include="Controllers\LuisClient.cs" />
     <Compile Include="LuisInfo.cs" />
-    <Compile Include="Models\DialogConversationModel.cs" />
     <Compile Include="Models\IntentDirectory.cs" />
     <Compile Include="Models\LodgingBot.cs" />
     <Compile Include="Models\MiscBot.cs" />
