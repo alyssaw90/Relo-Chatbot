@@ -44,6 +44,12 @@ namespace ReloChatBot.Models
             { "LocationRecomendation", "I think you should move to ..." }
         };
 
+        /*
+         * BotStates: 
+         * 
+         * 
+         */
+
         /// <summary>
         /// Where all the magic happens, where state will be kept and whatnot.
         /// </summary>
@@ -70,11 +76,26 @@ namespace ReloChatBot.Models
             return userData.GetProperty<string>(key);
         }
 
+        private bool GetBoolProperty(string key)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            return userData.GetProperty<bool>(key);
+        }
+
         private void SetProperty(string key, string value)
         {
             StateClient stateClient = this.activity.GetStateClient();
             BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
             userData.SetProperty<string>(key, value);
+            stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
+        }
+
+        private void SetProperty(string key, bool value)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            userData.SetProperty<bool>(key, value);
             stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
         }
 
@@ -84,12 +105,12 @@ namespace ReloChatBot.Models
 
             
 
-            if (this.GetProperty("test") == "test")
+            if (this.GetBoolProperty("test"))
             {
                 return "TEST WAS SET";
             } else
             {
-                this.SetProperty("test", "test");
+                this.SetProperty("test", true);
                 return "TEST WAS NOT SET";
             }
         }
