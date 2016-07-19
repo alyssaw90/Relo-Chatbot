@@ -35,7 +35,6 @@ namespace ReloChatBot.Models
     {
         private string intent;
         private Activity activity;
-
         private Dictionary<string, string> actions = new Dictionary<string, string>()
         {
             { "DetermineRelocationCost", "The average cost is ..." },
@@ -58,23 +57,40 @@ namespace ReloChatBot.Models
 
         public string Reply
         {
-            //get { return this.actions[this.intent]; }
-            get { return this.GetReply(); }
+            get
+            {
+                return this.GetReply();
+            }
+        }
+
+        private string GetProperty(string key)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            return userData.GetProperty<string>(key);
+        }
+
+        private void SetProperty(string key, string value)
+        {
+            StateClient stateClient = this.activity.GetStateClient();
+            BotData userData = stateClient.BotState.GetUserData(this.activity.ChannelId, this.activity.From.Id);
+            userData.SetProperty<string>(key, value);
+            stateClient.BotState.SetUserData(this.activity.ChannelId, this.activity.From.Id, userData);
         }
 
         private string GetReply()
         {
-            StateClient stateclient = this.activity.GetStateClient();
-            BotData data = stateclient.BotState.GetConversationData(activity.ChannelId, activity.From.Id);
+            // Manipulate bot state and generate a reply
 
             
-            if (data.GetProperty<string>("test") == "test")
+
+            if (this.GetProperty("test") == "test")
             {
-                return "Something ain't right...";
+                return "TEST WAS SET";
             } else
             {
-                data.SetProperty("test", "test");
-                return "Well.. something changed!";
+                this.SetProperty("test", "test");
+                return "TEST WAS NOT SET";
             }
         }
     }

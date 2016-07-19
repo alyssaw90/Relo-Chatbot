@@ -84,7 +84,7 @@ namespace ReloChatBot
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-
+                // Pass all the routing logic to BotController
                 LuisParser masterbot = new LuisParser(activity);
                 BotController Router = new BotController(masterbot, activity);
                 string result = Router.Reply;
