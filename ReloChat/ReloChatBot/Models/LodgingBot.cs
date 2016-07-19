@@ -56,6 +56,7 @@ namespace ReloChatBot.Models
 
         private string[] QuestionArray = {
             "Are you interested in Relocating?",
+            "Oh cool! Can I help you narrow down your choices?",
         };
 
         private LuisParser masterbot;
@@ -151,28 +152,39 @@ namespace ReloChatBot.Models
         {
             // Manipulate bot state and generate a reply
 
-            if (!this.GetBoolProperty("ClientInterestedInRelo") && !this.GetBoolProperty("AskedClientAboutRelo") && this.GetIntProperty("LastQuestion") != 0)
+            //bool test = !this.GetBoolProperty("AskedClientAboutRelo");
+
+            // If we haven't asked the client and relocation and the last question was not the relocation question
+            if (!this.GetBoolProperty("AskedClientAboutRelo") && this.GetIntProperty("LastQuestion") != 0)
             {
                 this.SetProperty("LastQuestion", 0);
                 return this.QuestionArray[0];
+            // If the last question was the relocation question
             } else if (this.GetIntProperty("LastQuestion") == 0)
             {
+                // and the user said yes...
                 if (this.masterbot.Intent == "PositiveConfirmation")
                 {
-                    this.SetProperty("LastQuestion", -1);
+                    this.SetProperty("LastQuestion", 1);
                     this.SetProperty("AskedClientAboutRelo", true);
                     this.SetProperty("ClientInterestedInRelo", true);
-                    return "Oh cool! Can I help you narrow down your choices?";
+                    return this.QuestionArray[1];
+                // and if the user said no...
                 } else if (this.masterbot.Intent == "NegativeConfirmation")
                 {
                     this.SetProperty("LastQuestion", -1);
                     this.SetProperty("AskedClientAboutRelo", true);
                     this.SetProperty("ClientInterestedInRelo", false);
                     return "Aww. Well sorry about that.";
+                // if the user doesn't make sense...
                 } else
                 {
                     return "Come again?";
                 }
+            // if the user is interested in relocation help...
+            } else if (this.GetBoolProperty("ClientInterestedInRelo")) {
+                return "I am going to help you find a new place.";
+            // and if all else fails...
             } else
             {
                 this.SetProperty("LastQuestion", -1);
