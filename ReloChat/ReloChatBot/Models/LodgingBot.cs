@@ -9,9 +9,11 @@ namespace ReloChatBot.Models
     public class LodgingBot : LuisParser
     {
         // Spot the python programmer again...
-    
+
         // The only way to get this to work, and not inherit the RESULTS from LuisParser (parent class)
         // Is to plug in api_endpoint as one of the paramters, and set a default
+
+        public LuisParser masterbot;
 
         public LodgingBot(Activity activity, string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=8547ee95-9496-43ca-a9a2-b583da92cd7e&subscription-key=6171c439d26540d6a380208a16b31958&q=") : base(activity, api_endpoint) { }
         public override string Reply
@@ -25,6 +27,10 @@ namespace ReloChatBot.Models
             return functionality.Reply;
         }
 
+        public void Seed(LuisParser masterbot)
+        {
+            this.masterbot = masterbot;
+        }
 
     }
 

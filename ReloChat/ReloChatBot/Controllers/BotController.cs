@@ -76,6 +76,7 @@ namespace ReloChatBot.Controllers
         {
             this.LastBotConversation = RedirectLodging;
             LodgingBot lobot = new LodgingBot(this.activity);
+            lobot.Seed(this.masterbot);
             this.reply = lobot.Reply;
         }
 
