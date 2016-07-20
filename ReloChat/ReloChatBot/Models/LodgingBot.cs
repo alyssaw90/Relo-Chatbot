@@ -39,6 +39,52 @@ namespace ReloChatBot.Models
     /// </summary>
     public class LodgingBotFunctionality
     {
+
+        private QuestionModel createQuestionBranching()
+        {
+            string yes = "PositiveConfirmation";
+            string no = "NegativeConfirmation";
+            QuestionModel root = new QuestionModel("Currently, Microsoft does not provide relocation services. Are you still interested in relocating?", this.masterbot); // 1
+            QuestionModel AskFamiliarity = new QuestionModel("Are you familiar with the Pacific Northwest?", this.masterbot); // 3
+            QuestionModel UserCityPreference = new QuestionModel("Do you have a paticular city in mind?", this.masterbot); // 4 // This should be Lobot determining the Intent.
+            QuestionModel ProvideHelp = new QuestionModel("Would you like help in narrowing down a place to temporarily lodge?", this.masterbot); // 5
+            QuestionModel CarAccess = new QuestionModel("Do you have access to car?", this.masterbot); // 6
+            QuestionModel BusAccess = new QuestionModel("Do you want to live near a bus stop? (Microsoft will provide free bus passes to you)", this.masterbot); // 7
+            QuestionModel CommuteMax = new QuestionModel("What is the maximum you're willing to commute?", this.masterbot); // 8
+            QuestionModel CommuteOrRent = new QuestionModel("Which is more important to you? Rent or Commute?", this.masterbot); // 9 // This shsould be lobot as well
+            QuestionModel RentRange = new QuestionModel("What is the range you're willing to pay for rent? (The average is about $2000)", this.masterbot); // 10
+
+            /*
+             * 
+             * Theoretically, the branches could be generated on the go. Why not? So we take the existing state,
+             * check it. Set it. Then proceed to the next branch
+             */
+
+            root.AddBranch(yes, ProvideHelp);
+            //root.AddBranch(no, "idek");
+
+            AskFamiliarity.AddBranch(yes, UserCityPreference);
+            AskFamiliarity.AddBranch(no, CommuteOrRent);
+
+            //UserCityPreference.AddBranch(yes, some logic here) to either 6 or 10
+            UserCityPreference.AddBranch(no, CommuteOrRent);
+
+            ProvideHelp.AddBranch(yes, AskFamiliarity);
+            //ProvideHelp.AddBranch(no, "idek");
+
+            CarAccess.AddBranch(yes, CommuteMax);
+            CarAccess.AddBranch(no, BusAccess);
+
+            BusAccess.AddBranch(yes, CommuteMax);
+            BusAccess.AddBranch(no, CommuteMax);
+
+            //CommuteMax.AddBranch("all"); // if rent was asked: goto 11, else goto RentRange
+
+            //RentRange.AddBranch(); if commute was asked: goto CarAccess else goto 11
+
+            return root;
+        }
+
         private string intent;
         private Activity activity;
         /// <summary>
