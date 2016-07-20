@@ -53,6 +53,8 @@ namespace ReloChatBot.Controllers
         private void handle_RedirectCommute()
         {
             CommuteBot combot = new CommuteBot(this.activity);
+  
+
             this.reply = combot.Reply;
         }
         public string Reply
