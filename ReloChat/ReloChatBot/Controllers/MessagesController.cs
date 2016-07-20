@@ -24,6 +24,10 @@ namespace ReloChatBot
         protected string api_endpoint;
         protected Activity activity;
         private string query;
+        /// <summary>
+        /// LuisInforData Used to Save Luis String Data
+        /// </summary>
+        public LuisInfo LuisInfoData;
 
         protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
@@ -35,6 +39,7 @@ namespace ReloChatBot
             this.api_endpoint = api_endpoint;
             this.client = new LuisClient();
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
+            this.LuisInfoData = JsonConvert.DeserializeObject<LuisInfo>(this.raw_result);
             this.JsonResult();
         }
 
