@@ -8,7 +8,7 @@ namespace ReloChatBot.Models
     public class QuestionModel
     {
         public string question;
-        private Dictionary<string, QuestionModel> branches;
+        private Dictionary<string, QuestionModel> branches = new Dictionary<string, QuestionModel>() { };
         private LuisParser provider;
 
         public QuestionModel(string question, LodgingBot provider)
