@@ -197,49 +197,88 @@ namespace ReloChatBot.Models
         /// <returns>The string to be shipped to the client</returns>
         private string GetReply()
         {
+            /*
+             * key meanings:
+             * 1: does user want to proceed?
+             */
+
+            QuestionModel question = this.createQuestionBranching();
+
+            string yes = "PositiveConfirmation";
+            string no = "NegativeConfiramtion";
+            string wat = "I did not get that.";
+
+            if (this.intent == "LeapRelocationServices")
+            {
+                return "";
+
+                //this.SetProperty("LastQuestion", 1);
+                //return question.question;
+            } else
+            {
+                int lastquestion = this.GetIntProperty("LastQuestion");
+                if (lastquestion == 1) 
+                {
+                    // The last question was "Do you want help relocating?
+                    if (this.masterbot.Intent == yes)
+                    {
+                        question = question.GetBranch(yes);
+                        return question.question;
+                    } else if (this.masterbot.Intent == no)
+                    {
+                        //question = question.GetBranch(no);
+                        return "Alright, let me know if I can help later though.";
+                    } else
+                    {
+                        return wat;
+                    }
+                }
+                return "default";
+            }
+
             // Manipulate bot state and generate a reply
 
             //bool test = !this.GetBoolProperty("AskedClientAboutRelo");
 
             // If we haven't asked the client and relocation and the last question was not the relocation question
-            if (this.intent == "LeapRelocationServices")
-            {
-                return this.actions[this.intent];
-            } else if (!this.GetBoolProperty("AskedClientAboutRelo") && this.GetIntProperty("LastQuestion") != 1)
-            {
-                this.SetProperty("LastQuestion", 1);
-                return this.QuestionArray[1];
-            // If the last question was the relocation question
-            } else if (this.GetIntProperty("LastQuestion") == 1)
-            {
-                // and the user said yes...
-                if (this.masterbot.Intent == "PositiveConfirmation")
-                {
-                    this.SetProperty("LastQuestion", 2);
-                    this.SetProperty("AskedClientAboutRelo", true);
-                    this.SetProperty("ClientInterestedInRelo", true);
-                    return this.QuestionArray[1];
-                // and if the user said no...
-                } else if (this.masterbot.Intent == "NegativeConfirmation")
-                {
-                    this.SetProperty("LastQuestion", 0);
-                    this.SetProperty("AskedClientAboutRelo", true);
-                    this.SetProperty("ClientInterestedInRelo", false);
-                    return "Aww. Well sorry about that.";
-                // if the user doesn't make sense...
-                } else
-                {
-                    return "Come again?";
-                }
-            // if the user is interested in relocation help...
-            } else if (this.GetBoolProperty("ClientInterestedInRelo")) {
-                return "I am going to help you find a new place.";
-            // and if all else fails...
-            } else
-            {
-                this.SetProperty("LastQuestion", -1);
-                return "default";
-            }
+            //if (this.intent == "LeapRelocationServices")
+            //{
+            //    return this.actions[this.intent];
+            //} else if (!this.GetBoolProperty("AskedClientAboutRelo") && this.GetIntProperty("LastQuestion") != 1)
+            //{
+            //    this.SetProperty("LastQuestion", 1);
+            //    return this.QuestionArray[1];
+            //// If the last question was the relocation question
+            //} else if (this.GetIntProperty("LastQuestion") == 1)
+            //{
+            //    // and the user said yes...
+            //    if (this.masterbot.Intent == "PositiveConfirmation")
+            //    {
+            //        this.SetProperty("LastQuestion", 2);
+            //        this.SetProperty("AskedClientAboutRelo", true);
+            //        this.SetProperty("ClientInterestedInRelo", true);
+            //        return this.QuestionArray[1];
+            //    // and if the user said no...
+            //    } else if (this.masterbot.Intent == "NegativeConfirmation")
+            //    {
+            //        this.SetProperty("LastQuestion", 0);
+            //        this.SetProperty("AskedClientAboutRelo", true);
+            //        this.SetProperty("ClientInterestedInRelo", false);
+            //        return "Aww. Well sorry about that.";
+            //    // if the user doesn't make sense...
+            //    } else
+            //    {
+            //        return "Come again?";
+            //    }
+            //// if the user is interested in relocation help...
+            //} else if (this.GetBoolProperty("ClientInterestedInRelo")) {
+            //    return "I am going to help you find a new place.";
+            //// and if all else fails...
+            //} else
+            //{
+            //    this.SetProperty("LastQuestion", -1);
+            //    return "default";
+            //}
 
         }
     }
