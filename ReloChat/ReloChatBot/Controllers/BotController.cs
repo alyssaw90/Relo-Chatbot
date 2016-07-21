@@ -3,6 +3,7 @@ using ReloChatBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace ReloChatBot.Controllers
@@ -12,13 +13,17 @@ namespace ReloChatBot.Controllers
         const string RedirectLodging = "RedirectLodging";
         const string RedirectCommute = "RedirectTransportation";
 
-        private LuisParser masterbot;
+        /*Changes Made By CommuteBot*/
+        public LuisParser masterbot;
+
+        //private LuisParser masterbot;
         private string userinput;
 
         private string reply;
         private Activity activity;
+        public string Reply;
 
-        public BotController(LuisParser masterbot, Activity activity)
+        public  BotController(LuisParser masterbot, Activity activity)
         {
             this.masterbot = masterbot;
             this.activity = activity;
@@ -28,10 +33,6 @@ namespace ReloChatBot.Controllers
                 if (masterbot.Intent == RedirectLodging)
                 {
                     this.handle_RedirectLodging();
-                }
-                if (masterbot.Intent == RedirectCommute)
-                {
-                    this.handle_RedirectCommute();
                 }
                 else
                 {
@@ -50,17 +51,20 @@ namespace ReloChatBot.Controllers
             this.reply = lobot.Reply;
         }
 
-        private void handle_RedirectCommute()
+        /*Changes Made By commuteBot*/
+        public async Task<string> handle_RedirectCommute()
         {
             CommuteBot combot = new CommuteBot(this.activity);
-  
+            var response = await CommuteMessageController.IntentsController(combot.LuisInfoData);
+            return response;
+        }
 
-            this.reply = combot.Reply;
-        }
-        public string Reply
-        {
-            get { return this.reply; }
-        }
+        /*Changes Made By commuteBot*/
+
+        //public string Reply
+        //{
+            //get { return this.reply; }
+        //}
 
     }
 }
