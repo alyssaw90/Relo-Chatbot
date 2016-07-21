@@ -84,15 +84,20 @@ namespace ReloChatBot
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
-
+            
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
+               
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 LuisParser masterbot = new LuisParser(activity);
                 BotController Router = new BotController(masterbot, activity);
-                string result = Router.Reply;
-
+                string result = String.Empty;
+                if (Router.masterbot.Intent == "RedirectTransportation")
+                {
+                     result = await Router.handle_RedirectCommute();
+                }
+                
                 Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
