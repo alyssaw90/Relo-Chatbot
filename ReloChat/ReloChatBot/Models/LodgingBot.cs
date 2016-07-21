@@ -202,39 +202,45 @@ namespace ReloChatBot.Models
              * 1: does user want to proceed?
              */
 
-            QuestionModel question = this.createQuestionBranching();
+            //QuestionModel question = this.createQuestionBranching();
 
-            string yes = "PositiveConfirmation";
-            string no = "NegativeConfiramtion";
-            string wat = "I did not get that.";
+            //string yes = "PositiveConfirmation";
+            //string no = "NegativeConfiramtion";
+            //string wat = "I did not get that.";
 
-            if (this.intent == "LeapRelocationServices")
-            {
-                return "";
+            return "At the moment, Leap does not offer Relocation services. However, we can help narrow down your search for temporary lodging. " +
+                   "Here's a link to [Redmond Apartments](https://www.forrent.com/find/WA/metro-Seattle/Redmond/price-Less+than+2000), "
+                   + "[Seattle Apartments](https://www.forrent.com/find/WA/metro-Seattle/Seattle/price-Less+than+2000), " +
+                   "[Bellevue Apartments](https://www.forrent.com/find/WA/metro-Seattle/Bellevue/price-Less+than+2000) and " +
+                   "[Edmonds Apartments](https://www.forrent.com/find/WA/metro-Seattle/Edmonds/price-Less+than+2000).";
 
-                //this.SetProperty("LastQuestion", 1);
-                //return question.question;
-            } else
-            {
-                int lastquestion = this.GetIntProperty("LastQuestion");
-                if (lastquestion == 1) 
-                {
-                    // The last question was "Do you want help relocating?
-                    if (this.masterbot.Intent == yes)
-                    {
-                        question = question.GetBranch(yes);
-                        return question.question;
-                    } else if (this.masterbot.Intent == no)
-                    {
-                        //question = question.GetBranch(no);
-                        return "Alright, let me know if I can help later though.";
-                    } else
-                    {
-                        return wat;
-                    }
-                }
-                return "default";
-            }
+            //if (this.intent == "LeapRelocationServices")
+            //{
+               
+
+            //    //this.SetProperty("LastQuestion", 1);
+            //    //return question.question;
+            //} else
+            //{
+            //    int lastquestion = this.GetIntProperty("LastQuestion");
+            //    if (lastquestion == 1) 
+            //    {
+            //        // The last question was "Do you want help relocating?
+            //        if (this.masterbot.Intent == yes)
+            //        {
+            //            question = question.GetBranch(yes);
+            //            return question.question;
+            //        } else if (this.masterbot.Intent == no)
+            //        {
+            //            //question = question.GetBranch(no);
+            //            return "Alright, let me know if I can help later though.";
+            //        } else
+            //        {
+            //            return wat;
+            //        }
+            //    }
+            //    return "default";
+            //}
 
             // Manipulate bot state and generate a reply
 
