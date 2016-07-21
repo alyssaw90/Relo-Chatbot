@@ -132,6 +132,7 @@
     <Compile Include="Models\IntentDirectory.cs" />
     <Compile Include="Models\LodgingBot.cs" />
     <Compile Include="Models\MiscBot.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
