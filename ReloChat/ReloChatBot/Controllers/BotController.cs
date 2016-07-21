@@ -84,6 +84,9 @@ namespace ReloChatBot.Controllers
         private void handle_RedirectMiscBot()
         {
             this.LastBotConversation = RedirectMisc;
+            MiscBot MBot = new MiscBot(this.activity.Text);
+            this.reply = MBot.Reply;
+
         }
 
         public string Reply
