@@ -40,6 +40,10 @@ namespace ReloChatBot.Controllers
                     //bool test = this.GetLastBotConversation() == RedirectLodging;
                     this.handle_RedirectLodging();
                 }
+                else if (masterbot.Intent == RedirectMisc)
+                {
+                    this.handle_RedirectMiscBot();
+                }
                 else
                 {
                     this.reply = masterbot.Reply;
@@ -84,7 +88,7 @@ namespace ReloChatBot.Controllers
         private void handle_RedirectMiscBot()
         {
             this.LastBotConversation = RedirectMisc;
-            MiscBot MBot = new MiscBot(this.activity.Text);
+            MiscBot MBot = new MiscBot(this.activity);
             this.reply = MBot.Reply;
 
         }
