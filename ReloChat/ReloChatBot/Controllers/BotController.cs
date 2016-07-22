@@ -21,7 +21,6 @@ namespace ReloChatBot.Controllers
 
         private string reply;
         private Activity activity;
-        //public string Reply;
 
         public  BotController(LuisParser masterbot, Activity activity)
         {
