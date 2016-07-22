@@ -21,7 +21,7 @@ namespace ReloChatBot.Controllers
 
         private string reply;
         private Activity activity;
-        public string Reply;
+        //public string Reply;
 
         public  BotController(LuisParser masterbot, Activity activity)
         {
@@ -61,10 +61,10 @@ namespace ReloChatBot.Controllers
 
         /*Changes Made By commuteBot*/
 
-        //public string Reply
-        //{
-            //get { return this.reply; }
-        //}
+        public string Reply
+        {
+            get { return this.reply; }
+        }
 
     }
 }
