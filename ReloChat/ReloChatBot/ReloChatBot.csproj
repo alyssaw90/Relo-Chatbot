@@ -119,8 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Commute\Commute.cs" />
-    <Compile Include="Commute\CommuteInfo.cs" />
     <Compile Include="Commute\CommuteUtilities.cs" />
     <Compile Include="Commute\GoogleAPIs.cs" />
     <Compile Include="Controllers\BotController.cs" />
@@ -135,6 +133,7 @@
     <Compile Include="Models\IntentDirectory.cs" />
     <Compile Include="Models\LodgingBot.cs" />
     <Compile Include="Models\MiscBot.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +175,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
