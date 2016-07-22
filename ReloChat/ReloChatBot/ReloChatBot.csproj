@@ -119,8 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Commute\Commute.cs" />
-    <Compile Include="Commute\CommuteInfo.cs" />
     <Compile Include="Commute\CommuteUtilities.cs" />
     <Compile Include="Commute\GoogleAPIs.cs" />
     <Compile Include="Controllers\BotController.cs" />
