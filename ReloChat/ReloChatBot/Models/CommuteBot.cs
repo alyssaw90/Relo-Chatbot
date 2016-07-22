@@ -44,6 +44,17 @@ namespace ReloChatBot.Models
                             responseMessage = "Sorry, I don't understand the location.";
                         }
                         break;
+                    case "GetTransportation":
+                        if (luisInfo.entities.Count() > 0)
+                        {
+                            //responseMessage = await CommuteUtilities.GetTransportation(luisInfo.entities[1].entity, luisInfo.entities[2].entity);
+                            responseMessage = "Check out this website: http://metro.kingcounty.gov/";
+                        }
+                        else
+                        {
+                            responseMessage = "Sorry, I don't understand the location.";
+                        }
+                        break;
                     default:
                         responseMessage = "Sorry, I don't know how to " + luisInfo.intents[0].intent;
                         break;
