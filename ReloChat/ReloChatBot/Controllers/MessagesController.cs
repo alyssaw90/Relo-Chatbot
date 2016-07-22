@@ -24,6 +24,10 @@ namespace ReloChatBot
         protected string api_endpoint;
         protected Activity activity;
         private string query;
+        /// <summary>
+        /// LuisInforData Used to Save Luis String Data
+        /// </summary>
+        public LuisInfo LuisInfoData;
 
         protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
@@ -32,9 +36,11 @@ namespace ReloChatBot
         public LuisParser(Activity activity, string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=")
         {
             this.query = activity.Text;
+            this.activity = activity;
             this.api_endpoint = api_endpoint;
             this.client = new LuisClient();
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
+            this.LuisInfoData = JsonConvert.DeserializeObject<LuisInfo>(this.raw_result);
             this.JsonResult();
         }
 
@@ -53,6 +59,10 @@ namespace ReloChatBot
             get { return this.Intent.StartsWith("Redirect"); }
         }
 
+        /// <summary>
+        /// Overwrite this with your own version
+        /// using `public override string Reply {get;}`
+        /// </summary>
         public virtual string Reply
         {
             get {
@@ -83,10 +93,18 @@ namespace ReloChatBot
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-
+                // Pass all the routing logic to BotController
                 LuisParser masterbot = new LuisParser(activity);
                 BotController Router = new BotController(masterbot, activity);
-                string result = Router.Reply;
+                string result = String.Empty;
+                if (Router.masterbot.Intent == "RedirectTransportation")
+                {
+                    result = await Router.handle_RedirectCommute();
+                }
+                else
+                {
+                    result = Router.Reply;
+                }
 
                 Activity reply = activity.CreateReply(result);
                 await connector.Conversations.ReplyToActivityAsync(reply);
