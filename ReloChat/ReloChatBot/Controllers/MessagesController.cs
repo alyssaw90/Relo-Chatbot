@@ -95,7 +95,11 @@ namespace ReloChatBot
                 string result = String.Empty;
                 if (Router.masterbot.Intent == "RedirectTransportation")
                 {
-                     result = await Router.handle_RedirectCommute();
+                    result = await Router.handle_RedirectCommute();
+                }
+                else
+                {
+                    result = Router.Reply;
                 }
                 
                 Activity reply = activity.CreateReply(result);
