@@ -119,15 +119,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Commute.cs" />
-    <Compile Include="CommuteInfo.cs" />
-    <Compile Include="CommuteUtilities.cs" />
+    <Compile Include="Commute\Commute.cs" />
+    <Compile Include="Commute\CommuteInfo.cs" />
+    <Compile Include="Commute\CommuteUtilities.cs" />
+    <Compile Include="Commute\GoogleAPIs.cs" />
+    <Compile Include="Controllers\BotController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Commute\DistanceInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\LuisClient.cs" />
     <Compile Include="LuisInfo.cs" />
+    <Compile Include="Models\CommuteBot.cs" />
+    <Compile Include="Models\IntentDirectory.cs" />
+    <Compile Include="Models\LodgingBot.cs" />
     <Compile Include="Models\MiscBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

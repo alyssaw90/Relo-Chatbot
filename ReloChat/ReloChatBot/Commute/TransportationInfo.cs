@@ -3,269 +3,267 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ReloChatBot
+namespace ReloChatBot.Transportation
 {
-    //All of our Commute Properties.
-    //Copy a Json file and got to edit, paste special, and "paste Json files as classes".
-
-    public class CommuteInfo
+    
+    public class TransportationInfo
     {
-        public Geocoded_Waypoints[] geocoded_waypoints { get; set; }
-        public Route[] routes { get; set; }
+        public geocoded_waypoints[] geocoded_waypoints { get; set; }
+        public route[] routes { get; set; }
         public string status { get; set; }
     }
 
-    public class Geocoded_Waypoints
+    public class geocoded_waypoints
     {
         public string geocoder_status { get; set; }
         public string place_id { get; set; }
         public string[] types { get; set; }
     }
 
-    public class Route
+    public class route
     {
-        public Bounds bounds { get; set; }
+        public bounds bounds { get; set; }
         public string copyrights { get; set; }
-        public Fare fare { get; set; }
-        public Leg[] legs { get; set; }
-        public Overview_Polyline overview_polyline { get; set; }
+        public fare fare { get; set; }
+        public leg[] legs { get; set; }
+        public overview_polyline overview_polyline { get; set; }
         public string summary { get; set; }
         public string[] warnings { get; set; }
         public object[] waypoint_order { get; set; }
     }
 
-    public class Bounds
+    public class bounds
     {
-        public Northeast northeast { get; set; }
-        public Southwest southwest { get; set; }
+        public northeast northeast { get; set; }
+        public southwest southwest { get; set; }
     }
 
-    public class Northeast
-    {
-        public float lat { get; set; }
-        public float lng { get; set; }
-    }
-
-    public class Southwest
+    public class northeast
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Fare
+    public class southwest
+    {
+        public float lat { get; set; }
+        public float lng { get; set; }
+    }
+
+    public class fare
     {
         public string currency { get; set; }
         public string text { get; set; }
         public float value { get; set; }
     }
 
-    public class Overview_Polyline
+    public class overview_polyline
     {
         public string points { get; set; }
     }
 
-    public class Leg
+    public class leg
     {
-        public Arrival_Time arrival_time { get; set; }
-        public Departure_Time departure_time { get; set; }
-        public Distance distance { get; set; }
-        public Duration duration { get; set; }
+        public arrival_time arrival_time { get; set; }
+        public departure_time departure_time { get; set; }
+        public distance distance { get; set; }
+        public duration duration { get; set; }
         public string end_address { get; set; }
-        public End_Location end_location { get; set; }
+        public end_location end_location { get; set; }
         public string start_address { get; set; }
-        public Start_Location start_location { get; set; }
-        public Step[] steps { get; set; }
+        public start_location start_location { get; set; }
+        public step[] steps { get; set; }
         public object[] traffic_speed_entry { get; set; }
         public object[] via_waypoint { get; set; }
     }
 
-    public class Arrival_Time
+    public class arrival_time
     {
         public string text { get; set; }
         public string time_zone { get; set; }
         public int value { get; set; }
     }
 
-    public class Departure_Time
+    public class departure_time
     {
         public string text { get; set; }
         public string time_zone { get; set; }
         public int value { get; set; }
     }
 
-    public class Distance
+    public class distance
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class Duration
+    public class duration
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class End_Location
+    public class end_location
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Start_Location
+    public class start_location
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Step
+    public class step
     {
-        public Distance1 distance { get; set; }
-        public Duration1 duration { get; set; }
-        public End_Location1 end_location { get; set; }
+        public distance1 distance { get; set; }
+        public duration1 duration { get; set; }
+        public end_location1 end_location { get; set; }
         public string html_instructions { get; set; }
-        public Polyline polyline { get; set; }
-        public Start_Location1 start_location { get; set; }
-        public Step1[] steps { get; set; }
+        public polyline polyline { get; set; }
+        public start_location1 start_location { get; set; }
+        public step1[] steps { get; set; }
         public string travel_mode { get; set; }
-        public Transit_Details transit_details { get; set; }
+        public transit_details transit_details { get; set; }
     }
 
-    public class Distance1
+    public class distance1
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class Duration1
+    public class duration1
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class End_Location1
+    public class end_location1
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Polyline
+    public class polyline
     {
         public string points { get; set; }
     }
 
-    public class Start_Location1
+    public class start_location1
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Transit_Details
+    public class transit_details
     {
-        public Arrival_Stop arrival_stop { get; set; }
-        public Arrival_Time1 arrival_time { get; set; }
-        public Departure_Stop departure_stop { get; set; }
-        public Departure_Time1 departure_time { get; set; }
+        public arrival_stop arrival_stop { get; set; }
+        public arrival_time1 arrival_time { get; set; }
+        public departure_stop departure_stop { get; set; }
+        public departure_time1 departure_time { get; set; }
         public string headsign { get; set; }
-        public Line line { get; set; }
+        public line line { get; set; }
         public int num_stops { get; set; }
     }
 
-    public class Arrival_Stop
+    public class arrival_stop
     {
-        public Location location { get; set; }
+        public location location { get; set; }
         public string name { get; set; }
     }
 
-    public class Location
+    public class location
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Arrival_Time1
+    public class arrival_time1
     {
         public string text { get; set; }
         public string time_zone { get; set; }
         public int value { get; set; }
     }
 
-    public class Departure_Stop
+    public class departure_stop
     {
-        public Location1 location { get; set; }
+        public location1 location { get; set; }
         public string name { get; set; }
     }
 
-    public class Location1
+    public class location1
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Departure_Time1
+    public class departure_time1
     {
         public string text { get; set; }
         public string time_zone { get; set; }
         public int value { get; set; }
     }
 
-    public class Line
+    public class line
     {
-        public Agency[] agencies { get; set; }
+        public agency[] agencies { get; set; }
         public string short_name { get; set; }
         public string url { get; set; }
-        public Vehicle vehicle { get; set; }
+        public vehicle vehicle { get; set; }
     }
 
-    public class Vehicle
+    public class vehicle
     {
         public string icon { get; set; }
         public string name { get; set; }
         public string type { get; set; }
     }
 
-    public class Agency
+    public class agency
     {
-        public string name { get; set; }
+        public string short_name { get; set; }
         public string phone { get; set; }
         public string url { get; set; }
     }
 
-    public class Step1
+    public class step1
     {
-        public Distance2 distance { get; set; }
-        public Duration2 duration { get; set; }
-        public End_Location2 end_location { get; set; }
-        public Polyline1 polyline { get; set; }
-        public Start_Location2 start_location { get; set; }
+        public distance2 distance { get; set; }
+        public duration2 duration { get; set; }
+        public end_location2 end_location { get; set; }
+        public polyline1 polyline { get; set; }
+        public start_location2 start_location { get; set; }
         public string travel_mode { get; set; }
         public string html_instructions { get; set; }
         public string maneuver { get; set; }
     }
 
-    public class Distance2
+    public class distance2
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class Duration2
+    public class duration2
     {
         public string text { get; set; }
         public int value { get; set; }
     }
 
-    public class End_Location2
+    public class end_location2
     {
         public float lat { get; set; }
         public float lng { get; set; }
     }
 
-    public class Polyline1
+    public class polyline1
     {
         public string points { get; set; }
     }
 
-    public class Start_Location2
+    public class start_location2
     {
         public float lat { get; set; }
         public float lng { get; set; }
