@@ -55,6 +55,17 @@ namespace ReloChatBot.Models
                             responseMessage = "Sorry, I don't understand the location.";
                         }
                         break;
+                    case "GetTraffic":
+                        if (luisInfo.entities.Count() > 0)
+                        {
+
+                            responseMessage = "Check out this website: http://www.wsdot.com/traffic/Seattle/TravelTimes/reliability/default.aspx";
+                        }
+                        else
+                        {
+                            responseMessage = "Sorry, I don't understand.";
+                        }
+                        break;
                     default:
                         responseMessage = "Sorry, I don't know how to " + luisInfo.intents[0].intent;
                         break;
