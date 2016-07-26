@@ -59,11 +59,14 @@ namespace ReloChatBot.Controllers
                 if (masterbot.Intent == PositiveConfirmation)
                 {
                     this.reply = "Hooray!";
+                } else if (masterbot.Intent == NegativeConfirmation)
+                {
+                  this.reply = "I see...";
                 } else
                 {
-                    this.reply = "I see...";
+                    this.reply = masterbot.Reply;
                 }
-                //this.reply = masterbot.Reply;
+
             }
         }
 
