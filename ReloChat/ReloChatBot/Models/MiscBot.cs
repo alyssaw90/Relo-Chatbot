@@ -9,8 +9,8 @@ namespace ReloChatBot.Models
 {
     public class MiscBot : LuisParser
     {
-        private LuisClient client;
-        private string raw_result;
+        // private LuisClient client;
+        // private string raw_result;
 
        public MiscBot(Activity activity,
             string api_endpoint =
@@ -19,7 +19,7 @@ namespace ReloChatBot.Models
         {
         }
 
-        public string Reply
+        public new string Reply
         {
             get { return this.GetReply(); }
         }
