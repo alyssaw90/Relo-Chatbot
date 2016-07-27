@@ -44,5 +44,5 @@ Where can I join a fitness class/zumba?
 "I'm sorry, I don't understand your question"
 
 ###MiscBot IntentDictionary
-[Link to image of MiscBot IntentDictionary] http://imgur.com/a/596dv 
+![Link to image of MiscBot IntentDictionary](http://i.imgur.com/z2AhvF7.png)
 
