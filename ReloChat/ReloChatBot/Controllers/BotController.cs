@@ -49,13 +49,24 @@ namespace ReloChatBot.Controllers
                 }
                 else
                 {
+                    // this.reply = "I see...";
                     this.reply = masterbot.Reply;
                     // this.reply = "No handle created for \"" + this.masterbot.Intent + "\"!";
                     // throw new Exception("No handle created for \"" + this.masterbot.Intent + "\"!");
                 }
             } else
             {
-                this.reply = masterbot.Reply;
+                if (masterbot.Intent == PositiveConfirmation)
+                {
+                    this.reply = "Hooray!";
+                } else if (masterbot.Intent == NegativeConfirmation)
+                {
+                  this.reply = "I see...";
+                } else
+                {
+                    this.reply = masterbot.Reply;
+                }
+
             }
         }
 
