@@ -37,7 +37,14 @@ namespace ReloChatBot.Models
                     case "GetDistance":
                         if (luisInfo.entities.Count() > 0)
                         {
-                            responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, luisInfo.entities[1].entity);
+                            if (luisInfo.entities.Length == 1)
+                            {
+                                responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, "Redmond,WA");
+                            }
+                            else
+                            {
+                                responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, luisInfo.entities[1].entity);
+                            }
                         }
                         else
                         {
@@ -48,7 +55,7 @@ namespace ReloChatBot.Models
                         if (luisInfo.entities.Count() > 0)
                         {
                   
-                            responseMessage = "Check out this website: http://metro.kingcounty.gov/";
+                            responseMessage = "Check out this website for public transportation: http://metro.kingcounty.gov/; If you want to get driving Information, please check out Bing map to get direction: http://www.bing.com/mapspreview";
                         }
                         else
                         {
