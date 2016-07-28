@@ -64,7 +64,14 @@ namespace ReloChatBot.Controllers
                   this.reply = "I see...";
                 } else
                 {
-                    this.reply = masterbot.Reply;
+                    if (masterbot.Intent == "None")
+                    {
+                        string query = "https://www.bing.com/search?q=" + Uri.EscapeDataString(masterbot.query);
+                        this.reply = "I'm not sure if I understood you, I can [bing your query](" + query + ") if you'd like.";
+                    } else
+                    {
+                        this.reply = masterbot.Reply;
+                    }
                 }
 
             }
