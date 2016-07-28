@@ -28,9 +28,9 @@ namespace ReloChatBot.Models
         {
             {
                 "GetWeather",
-                "Here is a link to the weather in [Redmond](https://weather.com/weather/today/l/USWA0367:1:US)"
+                "Here is a link to the weather in [Redmond](https://weather.com/weather/today/l/USWA0367:1:US), [Seattle](https://weather.com/weather/today/l/USWA0395:1:US), or [Bellevue](https://weather.com/weather/today/l/USWA0027:1:US)."
             },
-            {"GetShoppingCenter", "Here is a link to the [Bellevue Square Mall](http://bellevuecollection.com/)"},
+            {"GetShoppingCenter", "Here is a link to the [Bellevue Square Mall](http://bellevuecollection.com/). Bellevue Square Mall is about 7 miles southwest of the Redmond MSFT Campus."},
             {
                 "GetSupplies",
                 "LEAP will provide you with a laptop, monitor, keyboard and mouse for use during the program."
@@ -47,7 +47,7 @@ namespace ReloChatBot.Models
             },
             {
               "GetFood",
-              "Microsoft has several resturants on campus. All take a credit card, payment via phone (ex. Apple pay), or you can add money to your MSFT account. If you are looking for nearby resaurants, here is a [link](http://www.yelp.com/search?find_desc=&find_loc=redmond%2C+WA&ns=1)"
+              "Microsoft has several restaurants on campus. All take a credit card, payment via phone (ex. Apple pay), or you can add money to your MSFT account. If you are looking for nearby restaurants, here is a [link](http://www.yelp.com/search?find_desc=&find_loc=redmond%2C+WA&ns=1)"
             },
             {"None", "I'm sorry. I do not understand your question."},
 
