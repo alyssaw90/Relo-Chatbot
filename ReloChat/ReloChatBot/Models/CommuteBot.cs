@@ -52,16 +52,9 @@ namespace ReloChatBot.Models
                         }
                         break;
                     case "GetTransportation":
-                        if (luisInfo.entities.Count() > 0)
-                        {
 
-                            responseMessage = "Check out the King County Metro Online website for public transportation: http://metro.kingcounty.gov/. If you want to get driving information, use this link to Bing maps: http://www.bing.com/mapspreview";
-
-                        }
-                        else
-                        {
-                            responseMessage = "Sorry, I don't understand the location.";
-                        }
+                        responseMessage = "Check out the King County Metro Online website for public transportation: http://metro.kingcounty.gov/. If you want to get driving information, use this link to Bing maps: http://www.bing.com/mapspreview";
+              
                         break;
                     case "GetTraffic":
                         if (luisInfo.entities.Count() > 0)
