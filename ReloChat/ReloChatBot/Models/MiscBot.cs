@@ -45,6 +45,10 @@ namespace ReloChatBot.Models
                 "GetGym",
                 "The [ProClub](https://www.proclub.com/) is a few minutes from the north campus, and here is a link to other [gyms in the area](http://www.yelp.com/search?cflt=gyms&find_loc=Redmond%2C+WA)"
             },
+            {
+              "GetFood",
+              "Microsoft has several resturants on campus. All take a credit card, payment via phone (ex. Apple pay), or you can add money to your MSFT account. If you are looking for nearby resaurants, here is a [link](http://www.yelp.com/search?find_desc=&find_loc=redmond%2C+WA&ns=1)"
+            },
             {"None", "I'm sorry. I do not understand your question."},
 
         };
