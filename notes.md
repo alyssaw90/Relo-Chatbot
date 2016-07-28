@@ -29,6 +29,19 @@
 - short term rentals
 - where can i go hiking?
 - what is proclub?
+- is there temporary lodging nearby?
+- what is the price range in bellevue?
+- cheap places to rent
+- what's in redmond?
+- how much for a one bedroom appartment
+- is there free lodging near microsoft?
+- do we get a relocation package?
+- where can i find apartments in seattle?
+- whats the cost of living?
+- care rental (redirected to lodging)
+- what cohort is this?
+- what can i do in [city]?
+- i want to find a place under $1000 a month
 
 # Notes
 - People are treating this like a search engine, not a bot. We could have it automatically do some bing searches
