@@ -7,7 +7,12 @@ namespace ReloChatBot
 {
     public class LuisClient
     {
-        //A method that will send the user's input as a query to Luis and returns the intents and entities.
+        /// <summary>
+        /// A method that will send the user's input as a query to Luis and returns the intents and entities.
+        /// </summary>
+        /// <param name="endpoint">LUIS API End Point</param>
+        /// <param name="strInput">Questions asked by users</param>
+        /// <returns></returns>
         public string QueryLuis(string endpoint, string strInput)
         {
             string strRet = string.Empty;
