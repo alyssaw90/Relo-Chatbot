@@ -37,7 +37,14 @@ namespace ReloChatBot.Models
                     case "GetDistance":
                         if (luisInfo.entities.Count() > 0)
                         {
-                            responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, luisInfo.entities[1].entity);
+                            if (luisInfo.entities.Length == 1)
+                            {
+                                responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, "Redmond,WA");
+                            }
+                            else
+                            {
+                                responseMessage = await CommuteUtilities.GetDistance(luisInfo.entities[0].entity, luisInfo.entities[1].entity);
+                            }
                         }
                         else
                         {
@@ -47,8 +54,9 @@ namespace ReloChatBot.Models
                     case "GetTransportation":
                         if (luisInfo.entities.Count() > 0)
                         {
-                  
-                            responseMessage = "Check out this website: http://metro.kingcounty.gov/";
+
+                            responseMessage = "Check out the King County Metro Online website for public transportation: http://metro.kingcounty.gov/. If you want to get driving information, use this link to Bing maps: http://www.bing.com/mapspreview";
+
                         }
                         else
                         {
@@ -60,6 +68,17 @@ namespace ReloChatBot.Models
                         {
 
                             responseMessage = "Check out this website: http://www.wsdot.com/traffic/Seattle/TravelTimes/reliability/default.aspx";
+                        }
+                        else
+                        {
+                            responseMessage = "Sorry, I don't understand.";
+                        }
+                        break;
+                    case "GetAddress":
+                        if (luisInfo.entities.Count() > 0)
+                        {
+
+                            responseMessage = "Check out Bing map: http://www.bing.com/mapspreview";
                         }
                         else
                         {

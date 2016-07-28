@@ -48,14 +48,14 @@ namespace ReloChatBot.Models
             QuestionModel AskFamiliarity = new QuestionModel("Are you familiar with the Pacific Northwest?", this.masterbot); // 3
             QuestionModel UserCityPreference = new QuestionModel("Do you have a paticular city in mind?", this.masterbot); // 4 // This should be Lobot determining the Intent.
             QuestionModel ProvideHelp = new QuestionModel("Would you like help in narrowing down a place to temporarily lodge?", this.masterbot); // 5
-            QuestionModel CarAccess = new QuestionModel("Do you have access to car?", this.masterbot); // 6
-            QuestionModel BusAccess = new QuestionModel("Do you want to live near a bus stop? (Microsoft will provide free bus passes to you)", this.masterbot); // 7
+            QuestionModel CarAccess = new QuestionModel("Do you have access to a car?", this.masterbot); // 6
+            QuestionModel BusAccess = new QuestionModel("Do you want to live near a bus stop? (Microsoft will provide a free bus pass)", this.masterbot); // 7
             QuestionModel CommuteMax = new QuestionModel("What is the maximum you're willing to commute?", this.masterbot); // 8
             QuestionModel CommuteOrRent = new QuestionModel("Which is more important to you? Rent or Commute?", this.masterbot); // 9 // This shsould be lobot as well
             QuestionModel RentRange = new QuestionModel("What is the range you're willing to pay for rent? (The average is about $2000)", this.masterbot); // 10
 
             /*
-             * 
+             *
              * Theoretically, the branches could be generated on the go. Why not? So we take the existing state,
              * check it. Set it. Then proceed to the next branch
              */
@@ -212,18 +212,19 @@ namespace ReloChatBot.Models
                    "Here's a link to [Redmond Apartments](https://www.forrent.com/find/WA/metro-Seattle/Redmond/price-Less+than+2000), "
                    + "[Seattle Apartments](https://www.forrent.com/find/WA/metro-Seattle/Seattle/price-Less+than+2000), " +
                    "[Bellevue Apartments](https://www.forrent.com/find/WA/metro-Seattle/Bellevue/price-Less+than+2000) and " +
-                   "[Edmonds Apartments](https://www.forrent.com/find/WA/metro-Seattle/Edmonds/price-Less+than+2000).";
+                   "[Edmonds Apartments](https://www.forrent.com/find/WA/metro-Seattle/Edmonds/price-Less+than+2000). " +
+                   "Alternatively, you could also checkout [airbnb](https://www.airbnb.com/).";
 
             //if (this.intent == "LeapRelocationServices")
             //{
-               
+
 
             //    //this.SetProperty("LastQuestion", 1);
             //    //return question.question;
             //} else
             //{
             //    int lastquestion = this.GetIntProperty("LastQuestion");
-            //    if (lastquestion == 1) 
+            //    if (lastquestion == 1)
             //    {
             //        // The last question was "Do you want help relocating?
             //        if (this.masterbot.Intent == yes)
