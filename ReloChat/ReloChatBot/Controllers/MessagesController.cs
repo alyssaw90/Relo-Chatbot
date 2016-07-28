@@ -60,11 +60,6 @@ namespace ReloChatBot
             get { return json_result["intents"][0]["intent"].ToString(); }
         }
 
-        public string Entity
-        {
-            get { return json_result["entities"]; }
-        }
-
         public bool RedirectRequired
         {
             get { return this.Intent.StartsWith("Redirect"); }
