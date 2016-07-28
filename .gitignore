@@ -248,3 +248,6 @@ ModelManifest.xml
 secret.html
 secret.sh
 secret.bat
+
+# Custom Scripts
+RUN_ME_FIRST.sh
