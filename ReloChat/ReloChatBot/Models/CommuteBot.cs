@@ -55,7 +55,8 @@ namespace ReloChatBot.Models
                         if (luisInfo.entities.Count() > 0)
                         {
 
-                            responseMessage = "Check out this website for public transportation: http://metro.kingcounty.gov/. If you want to get driving information, use this link to Bing maps: http://www.bing.com/mapspreview";
+                            responseMessage = "Check out the King County Metro Online website for public transportation: http://metro.kingcounty.gov/. If you want to get driving information, use this link to Bing maps: http://www.bing.com/mapspreview";
+
                         }
                         else
                         {
@@ -67,6 +68,17 @@ namespace ReloChatBot.Models
                         {
 
                             responseMessage = "Check out this website: http://www.wsdot.com/traffic/Seattle/TravelTimes/reliability/default.aspx";
+                        }
+                        else
+                        {
+                            responseMessage = "Sorry, I don't understand.";
+                        }
+                        break;
+                    case "GetAddress":
+                        if (luisInfo.entities.Count() > 0)
+                        {
+
+                            responseMessage = "Check out Bing map: http://www.bing.com/mapspreview";
                         }
                         else
                         {
