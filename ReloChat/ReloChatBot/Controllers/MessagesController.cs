@@ -23,7 +23,13 @@ namespace ReloChatBot
         protected string raw_result;
         protected string api_endpoint;
         protected Activity activity;
-        private string query;
+
+        /// <summary>
+        /// Questions sent to Relo Chat Bot
+        /// and then attached to LUIS API (https://....q=<query>)
+        /// </summary>
+        public string query;
+
         /// <summary>
         /// LuisInforData Used to Save Luis String Data
         /// </summary>

@@ -13,12 +13,16 @@ namespace ReloChatBot
         /// <param name="endpoint">LUIS API End Point</param>
         /// <param name="strInput">Questions asked by users</param>
         /// <returns></returns>
+
+        public string query;
+
         public string QueryLuis(string endpoint, string strInput)
         {
             string strRet = string.Empty;
 
             //EscapeDataString removes invalid Uri characters i.e. spaces.
             string query = Uri.EscapeDataString(strInput);
+            this.query = query;
 
             using (var client = new HttpClient())
             {
