@@ -42,7 +42,16 @@
 - what cohort is this?
 - what can i do in [city]?
 - i want to find a place under $1000 a month
-
+- crime rate in seattle
+- what is the salary (redirected to misc)
+- is it expensive living in seattle
+- location "LEAP" = redmond
+- location "Microsoft building 85" = redmond
+- location "Microsoft Redmond campus" = redmond
+- how far away is shoreline?
+- I am relocating to seattle
+- what's the cheapest in redmond?
+- I want to find a place near bellevue
 # Notes
 - People are treating this like a search engine, not a bot. We could have it automatically do some bing searches
 - A couple of responses can't really be hard coded in. Some of it needs to be kept in a database that can be easily updated.
