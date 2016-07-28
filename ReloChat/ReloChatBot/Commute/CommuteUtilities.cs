@@ -38,7 +38,7 @@ namespace ReloChatBot
             }
             else
             {
-                strRet = string.Format("It will take about {0} from {1} to {2}", distanceInfo.rows[0].elements[0].distance.text, 
+                strRet = string.Format("It's about {0} from {1} to {2}", distanceInfo.rows[0].elements[0].distance.text, 
                      distanceInfo.origin_addresses[0], distanceInfo.destination_addresses[0]);
             }
             return strRet;

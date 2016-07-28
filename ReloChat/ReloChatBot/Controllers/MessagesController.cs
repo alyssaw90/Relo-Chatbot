@@ -21,31 +21,18 @@ namespace ReloChatBot
         // Spot the python programmer...
         protected LuisClient client;
         protected string raw_result;
-        /// <summary>
-        /// LUIS API end point 
-        /// </summary>
         protected string api_endpoint;
         protected Activity activity;
-        /// <summary>
-        /// Questions sent to Relo Chat Bot
-        /// and then attached to LUIS API (https://....q=<query>) 
-        /// </summary>
         private string query;
         /// <summary>
-        /// LuisInforData used to save luis string data
+        /// LuisInforData Used to Save Luis String Data
         /// </summary>
         public LuisInfo LuisInfoData;
-        /// <summary>
-        /// Dictionary for directing intents from users' questions 
-        /// </summary>
+
         protected Dictionary<string, string> actions = IntentDirectory.master_actions;
 
         public JObject json_result;
-        /// <summary>
-        /// LuisParser For parsering user input questions as object 
-        /// </summary>
-        /// <param name="activity">Object from ChatBot framework</param>
-        /// <param name="api_endpoint">LUIS API as entry point of main intents provided By Norton Pengra</param>
+
         public LuisParser(Activity activity, string api_endpoint = "https://api.projectoxford.ai/luis/v1/application?id=3f56e744-90ea-4850-bcd2-759eea1237e7&subscription-key=6171c439d26540d6a380208a16b31958&q=")
         {
             this.query = activity.Text;
@@ -65,6 +52,11 @@ namespace ReloChatBot
         public string Intent
         {
             get { return json_result["intents"][0]["intent"].ToString(); }
+        }
+
+        public string Entity
+        {
+            get { return json_result["entities"]; }
         }
 
         public bool RedirectRequired
