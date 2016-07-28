@@ -21,6 +21,14 @@
 - microsoft dress code
 - how much is rent?
 - I want to relocate
+- where is the airport?
+- Is this a paid internship?
+- where is seattle? where is bellevue/redmond?
+- what are the hours for leap?
+- where can i find an apartment?
+- short term rentals
+- where can i go hiking?
+- what is proclub?
 
 # Notes
 - People are treating this like a search engine, not a bot. We could have it automatically do some bing searches
