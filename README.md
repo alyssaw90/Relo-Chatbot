@@ -69,10 +69,10 @@ You can then access the `BotController.Reply` property (note the capital `R`) fr
 When loading the app, make sure to set `ReloChatBot` as the StartUp Project.
 ![image not showing?](http://i.imgur.com/WMKerVV.png)
 
-# Relobot Details:
-Tasks: Figure out what the User wants.
-Intents:
-- RedirectTransportation
-- RedirectLodging
-- WhatIsLeap
-- WhereIsLeap
+# Bot Hierarchy 
+Currently, the user input is fed through `MessagesController.cs` which is then passed to a `masterbot` which is a LUIS.ai bot that determines which bot to redirect to. The current redirects are:
+- `RedirectMisc` (Redirects to MiscellaneousBot)
+- `RedirectTransportation` (Redirects to CommuteBot)
+- `RedirectLodging` (Redirects to LodgeBot)
+
+These bots then determine a more specific intent.
