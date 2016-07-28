@@ -6,8 +6,15 @@ using System.Collections;
 
 namespace ReloChatBot.Models
 {
+    /// <summary>
+    /// IntentDirectory is a class for directing questions to the according intents 
+    /// based on questions asked by users from Relo-ChatBot
+    /// </summary>
     public static class IntentDirectory
     {
+        /// <summary>
+        /// master_actions is Dictionary including main intents of Relo Chat 
+        /// </summary>
         public static Dictionary<string, string> master_actions = new Dictionary<string, string>()
         {
             { "RedirectTransportation", "Sounds like you have commute questions" },
