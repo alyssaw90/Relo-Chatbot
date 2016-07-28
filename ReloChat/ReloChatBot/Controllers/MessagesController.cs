@@ -30,7 +30,7 @@ namespace ReloChatBot
         /// Questions sent to Relo Chat Bot
         /// and then attached to LUIS API (https://....q=<query>) 
         /// </summary>
-        private string query;
+        public string query;
         /// <summary>
         /// LuisInforData used to save luis string data
         /// </summary>
