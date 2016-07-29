@@ -106,7 +106,7 @@ namespace ReloChatBot.Controllers
             this.reply = lobot.Reply;
         }
 
-        /*Changes Made By commuteBot*/
+        /*Changes Made By CommuteBot*/
         public async Task<string> handle_RedirectCommute()
         {
             CommuteBot combot = new CommuteBot(this.activity);
@@ -114,7 +114,6 @@ namespace ReloChatBot.Controllers
             return response;
         }
 
-        /*Changes Made By commuteBot*/
         private void handle_RedirectMiscBot()
         {
             this.LastBotConversation = RedirectMisc;

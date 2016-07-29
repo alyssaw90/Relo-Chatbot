@@ -11,7 +11,7 @@ namespace ReloChatBot
     //Methods that will retrieve the correct commute info.
     public class CommuteUtilities
     {
-        //Get Commute Time for Cars
+        //Get Commute Time for driving
         public static async Task<string> GetCommuteTime(string origin, string destination)
         {
             string strRet = string.Empty;
@@ -29,7 +29,7 @@ namespace ReloChatBot
             return strRet;
         }
 
-        //Get Commute Distance for Cars
+        //Get Commute Distance for driving
         public static async Task<string> GetDistance(string origin, string destination)
         {
             string strRet = string.Empty;
@@ -40,7 +40,7 @@ namespace ReloChatBot
             }
             else
             {
-                strRet = string.Format("It will take about {0} from {1} to {2}. The average commute time is {3}. To get driving directions, please check out this Bing map: http://www.bing.com/mapspreview", distanceInfo.rows[0].elements[0].distance.text,
+                strRet = string.Format("It is about {0} from {1} to {2}. The average commute time is {3}. To get driving directions, please check out this Bing map: http://www.bing.com/mapspreview", distanceInfo.rows[0].elements[0].distance.text,
                      distanceInfo.origin_addresses[0], distanceInfo.destination_addresses[0], distanceInfo.rows[0].elements[0].duration.text);
             }
             return strRet;
