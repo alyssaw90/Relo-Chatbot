@@ -11,8 +11,9 @@ namespace ReloChatBot.Models
     {
         // private LuisClient client;
         // private string raw_result;
-
+        // this is the api_endpoint for the MiscoBot on Luis.ai
        public MiscBot(Activity activity,
+
             string api_endpoint =
                 "https://api.projectoxford.ai/luis/v1/application?id=024edd6d-8598-4a3c-b942-05705dfd39b7&subscription-key=ba3ed0b23b714c4f9a8ca0fe2eeddcea&q=")
             : base(activity, api_endpoint)
@@ -26,6 +27,7 @@ namespace ReloChatBot.Models
 
         private Dictionary<string, string> IntentDictionary = new Dictionary<string, string>()
         {
+          //The intents from Luis.ai are listed below with the responses for the MiscoBot
             {
                 "GetWeather",
                 "Here is a link to the weather in [Redmond](https://weather.com/weather/today/l/USWA0367:1:US), [Seattle](https://weather.com/weather/today/l/USWA0395:1:US), or [Bellevue](https://weather.com/weather/today/l/USWA0027:1:US)."
