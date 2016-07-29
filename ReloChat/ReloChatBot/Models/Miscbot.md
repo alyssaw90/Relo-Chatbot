@@ -6,6 +6,14 @@ Do I need an umbrella?
 
 Will it rain?
 
+###GetFood:
+
+Where can I get food?
+
+Where are nearby restaurants?
+
+Where can I eat?
+
 ###GetShoppingCenter:
 Where's the nearest mall?
 
