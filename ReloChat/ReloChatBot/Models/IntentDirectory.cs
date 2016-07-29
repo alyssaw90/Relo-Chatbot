@@ -13,7 +13,7 @@ namespace ReloChatBot.Models
     public static class IntentDirectory
     {
         /// <summary>
-        /// master_actions is Dictionary including main intents of Relo Chat 
+        /// master_actions is Dictionary including main intents about Relo Chat 
         /// </summary>
         public static Dictionary<string, string> master_actions = new Dictionary<string, string>()
         {
