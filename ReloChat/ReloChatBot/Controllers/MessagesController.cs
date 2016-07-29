@@ -63,7 +63,7 @@ namespace ReloChatBot
             this.raw_result = this.client.QueryLuis(this.api_endpoint, query);
             // convert json result into object according to ths blueprint LuisInfo Class; (This is used only by RedirectTransportation intent / CommuteBot )
             this.LuisInfoData = JsonConvert.DeserializeObject<LuisInfo>(this.raw_result);
-            // convert LUIS API query json result into JObject (This is used by )
+            // convert LUIS API query json result into JObject (This is used by RedirectLodging)
             this.JsonResult();
         }
 
@@ -72,11 +72,17 @@ namespace ReloChatBot
             this.json_result = JObject.Parse(this.raw_result);
         }
 
+        /// <summary>
+        /// get the first Intent from LUIS API with highest probability
+        /// </summary>
         public string Intent
         {
             get { return json_result["intents"][0]["intent"].ToString(); }
         }
 
+        /// <summary>
+        /// check whether need to redirect to sub bots , like commuteBot, lodgingBot
+        /// </summary>
         public bool RedirectRequired
         {
             get { return this.Intent.StartsWith("Redirect"); }
@@ -120,8 +126,10 @@ namespace ReloChatBot
                 LuisParser masterbot = new LuisParser(activity);
                 BotController Router = new BotController(masterbot, activity);
                 string result = String.Empty;
+
                 if (Router.masterbot.Intent == "RedirectTransportation")
                 {
+                    // Asychronous problem from back-end api to get distance and commute time
                     result = await Router.handle_RedirectCommute();
                 }
                 else

@@ -5,8 +5,9 @@ using System.Web;
 
 namespace ReloChatBot.Distance
 {
-    //Google API with DistanceInfo "DistanceMatrixAPI"
-    //"https://developers.google.com/maps/documentation/distance-matrix/start"
+    /// <summary>
+    /// DistanceInfo Class as blueprint to parser google api json result into object
+    /// </summary>
     public class DistanceInfo
     {
         public string[] destination_addresses { get; set; }
