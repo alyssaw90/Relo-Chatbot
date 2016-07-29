@@ -213,7 +213,7 @@ namespace ReloChatBot.Models
                    + "[Seattle Apartments](https://www.forrent.com/find/WA/metro-Seattle/Seattle/price-Less+than+2000), " +
                    "[Bellevue Apartments](https://www.forrent.com/find/WA/metro-Seattle/Bellevue/price-Less+than+2000) and " +
                    "[Edmonds Apartments](https://www.forrent.com/find/WA/metro-Seattle/Edmonds/price-Less+than+2000). " +
-                   "Alternatively, you could also checkout [airbnb](https://www.airbnb.com/).";
+                   "Alternatively, you could also checkout [airbnb](https://www.airbnb.com/) or [aPodments](http://apodment.com/).";
 
             //if (this.intent == "LeapRelocationServices")
             //{
