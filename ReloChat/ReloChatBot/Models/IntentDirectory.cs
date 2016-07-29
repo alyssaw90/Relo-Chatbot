@@ -20,7 +20,7 @@ namespace ReloChatBot.Models
             { "RedirectTransportation", "Sounds like you have commute questions" },
             { "RedirectLodging", "Sounds like you have lodging questions" },
             { "WhatIsLeap", "Sounds like you have questions regarding what LEAP is" },
-            { "WhereIsLeap", "Leap is located in Microsoft Building 86." },
+            { "WhereIsLeap", "Leap is located at [Microsoft, Redmond](https://binged.it/2awaDs2)." },
             { "None", "I'm not sure if I understood you properly." },
             { "FriendlyUser", "Hello! I am Relo. A bot here to help you with all relocation questions. Ask me anything about relocating, commute or about living near Redmond." },
         };
