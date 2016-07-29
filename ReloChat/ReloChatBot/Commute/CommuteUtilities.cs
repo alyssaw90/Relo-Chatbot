@@ -15,6 +15,17 @@ namespace ReloChatBot
         public static async Task<string> GetCommuteTime(string origin, string destination)
         {
             string strRet = string.Empty;
+
+            // google api cannot recognize microsoft. rewarite string to add City and State
+            if (origin.ToLower().Contains("microsoft"))
+            {
+                origin = "Microsoft,Redmond,WA";
+            }
+
+            if (destination.ToLower().Contains("microsoft"))
+            {
+                destination = "Microsoft,Redmond,WA";
+            }
             DistanceInfo distanceInfo = await GoogleAPIs.GetDistanceInfoAsync(origin, destination);
             if (null == distanceInfo)
             {
@@ -33,6 +44,16 @@ namespace ReloChatBot
         public static async Task<string> GetDistance(string origin, string destination)
         {
             string strRet = string.Empty;
+            // google api cannot recognize microsoft. rewarite string to add City and State
+            if (origin.ToLower().Contains("microsoft"))
+            {
+                origin = "Microsoft,Redmond,WA";
+            }
+
+            if (destination.ToLower().Contains("microsoft"))
+            {
+                destination = "Microsoft,Redmond,WA";
+            }
             DistanceInfo distanceInfo = await GoogleAPIs.GetDistanceInfoAsync(origin, destination);
             if (null == distanceInfo)
             {
